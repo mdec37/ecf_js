@@ -204,7 +204,7 @@ function apiResultRecords(idArtist) {
         
             if(idArtist.length){
                 let lengthRecord = document.createElement("p");
-                lengthRecord.textContent = "durée : " + (idArtist.length * 0.001 / 60) + ' minutes';
+                lengthRecord.textContent = "duréee : " + (idArtist.length * 0.001 / 60) + ' minutes';
                     modalBody.appendChild(lengthRecord);
             }
 
