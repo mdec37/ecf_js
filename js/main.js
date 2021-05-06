@@ -4,7 +4,7 @@ const selectForm = document.querySelector("#search-select");
 
 searchForm.addEventListener("submit", (ev) => {
     ev.preventDefault();
-    resultsZone.textContent = " ";
+    resultsZone.textContent = "";
 
     if (selectForm.value == "artiste") {
         apiGetArtist(artistName.value);

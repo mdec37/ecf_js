@@ -9,6 +9,8 @@ const bodyContainer = document.body;
 function apiResult(result, response) {
     if (result) {
         if (result.score === 100 ) {
+
+
         console.log(result);
         console.log(response);
 
@@ -66,13 +68,9 @@ function apiResultRecords(idArtist) {
         /// 1 - AFFICHER LES ARTISTES
 
         let artisteName = document.createElement("span");        
-        //artisteName.textContent = " ARTISTE : " + idArtist["artist-credit"][0].name + " ";
         artisteName.textContent =  " ARTISTE : " + forRecordingName() + " ";
         myRecording.appendChild(artisteName);
 
-        // for (var i = 0; i < idArtist["artist-credit"].length; i++) {
-        //     console.log(idArtist["artist-credit"][i].name);
-        // }
 
         // FONCTION BOUCLE D'AFFICHAGE DES ARTISTES
         function forRecordingName () {
@@ -95,16 +93,10 @@ function apiResultRecords(idArtist) {
 
     
 
+
         /// 3- AFFICHER LES ALBUMS
             
         let releaseName = document.createElement("span");
-        //releaseName.textContent =  " ALBUM : " + idArtist.releases[0].title + " ";
-        //myRecording.appendChild(releaseName);
-        
-            // for (var i = 0; i < idArtist.releases.length; i++) {
-            //     console.log(idArtist.releases[i].title);
-            // }
-
         releaseName.textContent =  " ALBUM : " + forReleaseTitle() + " ";
         myRecording.appendChild(releaseName);
         
@@ -132,7 +124,6 @@ function apiResultRecords(idArtist) {
 
         /// 4- AFFICHER LE BOUTON DE LA MODAL
 
-
         // Bouton pluss d'informations
         let btnInfo = document.createElement("button");
         btnInfo.textContent = "PLUS";
@@ -140,7 +131,7 @@ function apiResultRecords(idArtist) {
         btnInfo.id = "btnPlus";
         btnInfo.setAttribute('data-bs-toggle', 'modal');
         btnInfo.setAttribute('data-bs-target', '#exampleModal');
-        btnInfo.setAttribute('dataId', idArtist.releases[0].id );
+        btnInfo.setAttribute('dataId', idArtist.releases[0].id);
 
         
 
@@ -184,6 +175,8 @@ function apiResultRecords(idArtist) {
             modalBtn.setAttribute('type', 'button');
 
             modalHeader.appendChild(modalBtn);
+
+
 
         
         // MODAL BODY
@@ -269,12 +262,23 @@ function apiResultRecords(idArtist) {
 
         // EVENEMENTS AU CLIC : AFFICHAGE DES COVERS
         btnInfo.addEventListener("click", () => {
-            apiGetCover(idArtist.releases[0].id);
 
-            // idTitre = dataId.target.attributes[4].nodeValue;
-            // duree = idArtist.length;
-            // // METTRE TOUS LES ELEMENTS DANS LES PARAMETRES
-            // apiModal(idArtist);
+            function idReleases () {
+                let idReleases = '';
+                for (var i = 0; i < idArtist.releases.length; i++) {
+                    idReleases = idArtist.releases[i].id;
+                }
+                return idReleases;
+            }
+
+            //apiGetCover(idArtist.releases[0].id);
+            apiGetCover(idReleases());
+            
+
+            idTitre = dataId.target.attributes[4].nodeValue;
+            duree = idArtist.length;
+            // METTRE TOUS LES ELEMENTS DANS LES PARAMETRES
+            apiModal(idArtist);
         });
 
 
@@ -318,10 +322,10 @@ function apiResultRecords(idArtist) {
 //     const resultModal = document.querySelector("#resultModal");
 
 
-//     // // Création de l'article (container)
-//     // let myModal = document.createElement("article");
-//     // myModal.textContent = "id titre : " + idTitre + " + durée : " + duree + " mms + ";
-//     // myModal.className = "myModal";
+//     Création de l'article (container)
+//     let myModal = document.createElement("article");
+//     myModal.textContent = "id titre : " + idTitre + " + durée : " + duree + " mms + ";
+//     myModal.className = "myModal";
 
 
 // }
@@ -345,7 +349,7 @@ function apiCover(idRelease){
     let newReleaseCover = document.createElement("img");
     newReleaseCover.className = "myRecordId";
     newReleaseCover.setAttribute('src', idRelease.thumbnails.small);
-    myRelease.appendChild(newReleaseCover); 
+    myRelease.appendChild(newReleaseCover);
 
 
     resultModal.appendChild(myRelease);

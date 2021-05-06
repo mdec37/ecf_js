@@ -9,7 +9,6 @@ function apiGetArtist(result) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
                 response.artists.map(result => apiResult(result, response));
-
             } else {
                 console.log("error");
             }
