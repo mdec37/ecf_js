@@ -9,40 +9,12 @@ const bodyContainer = document.body;
 function apiResult(result, response) {
     if (result) {
         if (result.score === 100 ) {
+            console.log(result);
+            console.log(response);
 
-
-        console.log(result);
-        console.log(response);
-
-        // ATTENTION GERER LES ERREURS DE NOMS (FAUTES D'ORTHOGRAPHE) 
-        // VOIR SI BONNE PRATIQUE DE RECUP L'ID ET LE NOM DE L'ARTISTE SI MAL ECRIS
-        // VOIR RECHERCHE QUAND NOM COMPOSE (AVEC ESPACE) CE QUI EST RECHERCHE VRAIMENT
-
-                //ARTISTE
-            // Création de l'article (container)
-            let myArtist = document.createElement("article");
-
-            let recherche = document.createElement("span");
-            recherche.textContent = "Résultat de la recherche pour : ";
-            myArtist.appendChild(recherche);
-
-            // Création du nom de l'artiste et attribution
-            let newArtisteName = document.createElement("span");
-            newArtisteName.textContent = " nom de l'artiste : " + result.name + " - ";
-            myArtist.appendChild(newArtisteName);
-
-            // Création de l'score de l'artiste et attribution
-            let newArtisteScore = document.createElement("span");
-            newArtisteScore.textContent = " score : " + result.score + " - ";
-            myArtist.appendChild(newArtisteScore);
-
-            // // Création du nombre de recherche
-            let newArtisteNombre = document.createElement("span");
-            newArtisteNombre.textContent = " nombre de résultat : " + response.count + " / ";
-            myArtist.appendChild(newArtisteNombre);
-
-            // Ici j'intègre l'article à l'espace principal
-            resultsZone.appendChild(myArtist);
+            // ATTENTION GERER LES ERREURS DE NOMS (FAUTES D'ORTHOGRAPHE) 
+            // VOIR SI BONNE PRATIQUE DE RECUP L'ID ET LE NOM DE L'ARTISTE SI MAL ECRIS
+            // VOIR RECHERCHE QUAND NOM COMPOSE (AVEC ESPACE) CE QUI EST RECHERCHE VRAIMENT
 
             apiGetArtistTitre(result.id);
     }
@@ -56,12 +28,55 @@ function apiResult(result, response) {
 
 
 
+let nbLineResult = 0;
+let premiereFois = false;
 
-function apiResultRecords(idArtist) {
-    console.log(idArtist);
+function apiResultRecords(idArtist, response) {
     
+    nbLineResult += 1;
+
+    console.log(idArtist, response);
+
+    
+    if (!premiereFois){
+        // RESULTAT DE LA RECHERCHE :
+            // Création de l'article (container)
+            let myArtist = document.createElement("article");
+
+            let recherche = document.createElement("span");
+            recherche.textContent = "Résultat de la recherche pour : ";
+            myArtist.appendChild(recherche);
+
+            // Création du nom de l'artiste et attribution
+            let newArtisteName = document.createElement("span");
+            newArtisteName.textContent = " nom de l'artiste : " + idArtist["artist-credit"][0].name + " - ";
+            myArtist.appendChild(newArtisteName);
+
+            // // Création du nombre de recherche
+            let newArtisteNombre = document.createElement("span");
+            newArtisteNombre.textContent = " nombre de résultat : " + response.count + " / ";
+            myArtist.appendChild(newArtisteNombre);
+
+            // Ici j'intègre l'article à l'espace principal
+            resultsZone.appendChild(myArtist);
+
+        premiereFois = true;
+      }
+
+
+
+
     // Création de l'article (container)
         let myRecording = document.createElement("article");
+
+
+
+        /// 0 - AFFICHER LE NUMERO DE LA LIGNE
+
+        let nbLine = document.createElement("span");
+        nbLine.textContent =  " Ligne : " + nbLineResult;
+        
+        myRecording.appendChild(nbLine);
 
 
 
@@ -70,7 +85,6 @@ function apiResultRecords(idArtist) {
         let artisteName = document.createElement("span");        
         artisteName.textContent =  " ARTISTE : " + forRecordingName() + " ";
         myRecording.appendChild(artisteName);
-
 
         // FONCTION BOUCLE D'AFFICHAGE DES ARTISTES
         function forRecordingName () {
@@ -89,7 +103,6 @@ function apiResultRecords(idArtist) {
         let recordName = document.createElement("span");
         recordName.textContent = " TITRE : " + idArtist.title + " ";
         myRecording.appendChild(recordName);
-
 
     
 
@@ -119,7 +132,6 @@ function apiResultRecords(idArtist) {
         // //     console.log(idArtist.releases[i].id);
         // // }
 
-        
 
 
         /// 4- AFFICHER LE BOUTON DE LA MODAL
@@ -275,8 +287,8 @@ function apiResultRecords(idArtist) {
             apiGetCover(idReleases());
             
 
-            idTitre = dataId.target.attributes[4].nodeValue;
-            duree = idArtist.length;
+            // idTitre = dataId.target.attributes[4].nodeValue;
+            // duree = idArtist.length;
             // METTRE TOUS LES ELEMENTS DANS LES PARAMETRES
             apiModal(idArtist);
         });
