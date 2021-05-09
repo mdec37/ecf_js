@@ -1,3 +1,5 @@
 1 // Modifier le tbody pour gérer le scroll
 
 2 // Faire design pour modal
+
+3 // Les recherches à la suite ne fonctionnent pas sans refresh la page
