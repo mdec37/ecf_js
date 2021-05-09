@@ -1,5 +1,16 @@
+/// TO DO 
+
 1 // Modifier le tbody pour gérer le scroll
 
 2 // Faire design pour modal
 
-3 // Les recherches à la suite ne fonctionnent pas sans refresh la page
+3 // Les recherches à la suite ne fonctionnent pas sans refresh la page sur le projet main
+
+
+
+
+
+/// DO
+1 // Numéro de lignes (main.js)
+
+2 // Gérer si pas d'id de release pour le bouton (dom.js)

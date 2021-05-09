@@ -18,7 +18,7 @@ function apiResult(result, response) {
             // VOIR RECHERCHE QUAND NOM COMPOSE (AVEC ESPACE) CE QUI EST RECHERCHE VRAIMENT
 
             apiGetArtistTitre(result.id);
-    }
+        }
     
     } else {
         resultsZone.textContent = "Il faut saisir quelque chose";
@@ -130,12 +130,19 @@ function apiResultRecords(idArtist, response) {
 
         /// 4- AFFICHER LE BOUTON DE LA MODAL
         let btnInfo = document.createElement("button");
-        btnInfo.textContent = "PLUS";
-        btnInfo.className = "btn btn-primary";
-        btnInfo.id = "btnPlus";
-        btnInfo.setAttribute('data-bs-toggle', 'modal');
-        btnInfo.setAttribute('data-bs-target', '#exampleModal');
-        btnInfo.setAttribute('dataId', idArtist.releases[0].id);
+        if (idArtist.releases){
+            btnInfo.textContent = "PLUS";
+            btnInfo.className = "btn btn-primary";
+            btnInfo.id = "btnPlus";
+            btnInfo.setAttribute('data-bs-toggle', 'modal');
+            btnInfo.setAttribute('data-bs-target', '#exampleModal');
+            btnInfo.setAttribute('dataId', idArtist.releases[0].id);
+        } else {
+            btnInfo.textContent = "X";
+            btnInfo.className = "btn btn-primary";
+            btnInfo.setAttribute('title', 'Pas d\'informations supplémentaires');
+        }
+        
 
 
 
@@ -191,8 +198,15 @@ function apiResultRecords(idArtist, response) {
             // Vérifier qu'il y a une durée
             if(idArtist.length){
                 let lengthRecord = document.createElement("p");
-                    lengthRecord.textContent = "duréee : " + (idArtist.length * 0.001 / 60) + ' minutes';
+                    lengthRecord.textContent = "duréee : " + (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
                 modalBody.appendChild(lengthRecord);
+
+
+                function millisToMinutesAndSeconds(millis) {
+                    let minutes = Math.floor(millis / 60000);
+                    let seconds = ((millis % 60000) / 1000).toFixed(0);
+                    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+                }
             }
 
             // Vérifier qu'il y a un titre
