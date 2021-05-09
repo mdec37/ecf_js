@@ -16,3 +16,5 @@
 2 // Gérer si pas d'id de release pour le bouton (dom.js)
 
 3 // Corriger la durée des chansons (dom.js)
+
+4 // Offset

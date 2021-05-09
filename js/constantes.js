@@ -12,3 +12,5 @@ const CONTAINER_RESPONSE = document.querySelector("#container-response");
 
 const TABLE = document.createElement("table");
 const TBODY = document.createElement("tbody");
+
+const BTN_TEST = document.querySelector("#test");

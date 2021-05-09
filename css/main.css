@@ -178,7 +178,7 @@ main table thead th {
 }
 main table tbody {
     overflow: scroll;
-    max-height: 41rem;
+    max-height: 45vh;
     display: block;
 }
 main table tbody tr:nth-child(even) {

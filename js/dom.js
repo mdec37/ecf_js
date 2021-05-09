@@ -5,10 +5,6 @@ function artistResult(artist, response) {
             console.log(artist);
             console.log(response);
 
-            // ATTENTION GERER LES ERREURS DE NOMS (FAUTES D'ORTHOGRAPHE) 
-            // VOIR SI BONNE PRATIQUE DE RECUP L'ID ET LE NOM DE L'ARTISTE SI MAL ECRIS
-            // VOIR RECHERCHE QUAND NOM COMPOSE (AVEC ESPACE) CE QUI EST RECHERCHE VRAIMENT
-
             apiGetTitle(artist.id);
     }
     
@@ -104,6 +100,7 @@ function titleResult(idArtist, response) {
                     recordingName += idArtist["artist-credit"][i].name;
                 }
             }
+            // Ne pas afficher le dernier "feat" s'il y a plus de 2 artistes
             let lastCharacter = recordingName.slice(-5, -1);
             if(lastCharacter == "feat"){
                 recordingName = recordingName.slice(0, -6);
@@ -141,6 +138,7 @@ function titleResult(idArtist, response) {
                     releaseTitle += idArtist.releases[i].title;
                 }
             }
+            // Ne pas afficher le dernier "&" s'il y a plus de 2 albums
             let lastCharacter = releaseTitle.slice(-1);
             if(lastCharacter == "&"){
                 releaseTitle = releaseTitle.slice(0, -2);
@@ -154,20 +152,23 @@ function titleResult(idArtist, response) {
     /// 4- AFFICHER LE BOUTON DE LA MODAL
     let tdButton = document.createElement("td");
 
-        let btnInfo = document.createElement("button");
+    let btnInfo = document.createElement("button");
     if(idArtist.releases){
-            btnInfo.className = "btn";
-            btnInfo.id = "btnPlus";
-            btnInfo.setAttribute('data-bs-toggle', 'modal');
-            btnInfo.setAttribute('data-bs-target', '#exampleModal');
-            btnInfo.setAttribute('dataId', idArtist.releases[0].id);
-
+        btnInfo.className = "btn";
+        btnInfo.id = "btnPlus";
+        btnInfo.setAttribute('data-bs-toggle', 'modal');
+        btnInfo.setAttribute('data-bs-target', '#exampleModal');
+        btnInfo.setAttribute('dataId', idArtist.releases[0].id);
+    } else {
+        btnInfo.textContent = "X";
+        btnInfo.className = "btn btn-primary";
+        btnInfo.setAttribute('title', 'Pas d\'informations supplémentaires');
     }
 
-        let btnImg = document.createElement("img");
-            btnImg.src = "../img/plus.svg";
-            btnImg.className = "icon-plus";
-            btnImg.setAttribute('alt', 'Icone pour plus d\'informations');
+    let btnImg = document.createElement("img");
+        btnImg.src = "../img/plus.svg";
+        btnImg.className = "icon-plus";
+        btnImg.setAttribute('alt', 'Icone pour plus d\'informations');
     btnInfo.appendChild(btnImg);
     tdButton.appendChild(btnInfo);
 
@@ -218,30 +219,27 @@ function titleResult(idArtist, response) {
 
 
 
-    /// EVENEMENTS A L'OUVERTURE DE LA MODAL : AFFICHAGE
-    modalFade.addEventListener('shown.bs.modal', function () {
-        modalBody.textContent = null;
-
+    /// EVENEMENTS AU CLIC DU BOUTON : AFFICHAGE DES INFOS DE LA MODAL + AFFICHAGE DES COVERS
+    btnInfo.addEventListener("click", () => {
         // Vérifier qu'il y a une durée
         if(idArtist.length){
-            let lengthRecord = document.createElement("p");
-                lengthRecord.textContent = "duréee : " + (idArtist.length * 0.001 / 60) + ' minutes';
-            modalBody.appendChild(lengthRecord);
+            duree = "duréee : " + (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
+
+            function millisToMinutesAndSeconds(millis) {
+                let minutes = Math.floor(millis / 60000);
+                let seconds = ((millis % 60000) / 1000).toFixed(0);
+                return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+            }
         }
 
         // Vérifier qu'il y a un titre
         if(idArtist.title){
-            let nameRecord = document.createElement("p");
-                nameRecord.textContent = "title : " + idArtist.title;
-            modalBody.appendChild(nameRecord);
+            titre = "title : " + idArtist.title;
         }
 
         // Vérifier qu'il y a un artiste
         if(idArtist["artist-credit"]){
-            let nameArtist = document.createElement("p");
-                // nameArtist.textContent = "nom artiste : " + idArtist["artist-credit"][0].name;
-                nameArtist.textContent =  " nom artiste : " + forArtistName() + " ";
-            modalBody.appendChild(nameArtist);
+            artiste =  " nom artiste : " + forArtistName() + " ";
                 
             function forArtistName () {
                 let artisteName = '';
@@ -251,13 +249,10 @@ function titleResult(idArtist, response) {
                 return artisteName;
             }
         }
-        
+
         // Vérifier qu'il y a des albums
         if(idArtist.releases){
-            let nameReleases = document.createElement("p");
-                //nameReleases.textContent = "nom album: " + idArtist.releases[0].title;
-                nameReleases.textContent =  " nom album : " + forReleaseName() + " ";
-            modalBody.appendChild(nameReleases);
+            album = " nom album : " + forReleaseName() + " ";
                 
             function forReleaseName () {
                 let releaseName = '';
@@ -267,13 +262,10 @@ function titleResult(idArtist, response) {
                 return releaseName;
             }
         }
-        
+
         // Vérifier qu'il y a des genres
         if(idArtist.tags){
-            let tags = document.createElement("p");
-                //tags.textContent = "genre : " + idArtist.tags[0].name;
-                tags.textContent =  " genre : " + forTags() + " ";
-            modalBody.appendChild(tags);
+            tag = " genre : " + forTags() + " ";
                 
             function forTags () {
                 let tagsName = '';
@@ -283,13 +275,13 @@ function titleResult(idArtist, response) {
                 return tagsName;
             }
         }
-    });
 
 
+        // APPEL DE LA FONCTION MODALRESULT AVEC COMME PARAMETRES, CHAQUE ELEMENTS CREES
+        modalResult(duree, titre, artiste, album, tag = "");
 
-    /// EVENEMENTS AU CLIC DU BOUTON : AFFICHAGE DES COVERS
-    btnInfo.addEventListener("click", () => {
-        // Récupérer tous les id des albums qu'on passe en paramètres de APIGETCOVER qui appel les cover
+
+        // RECUPERER TOUS LES ID DES ALBUMS QU'ON PASSE EN PARAMETRE DE APIGETCOVER QUI APPELLE LES COVERS
         function idReleases () {
             let idReleases = '';
             for (var i = 0; i < idArtist.releases.length; i++) {
@@ -297,22 +289,15 @@ function titleResult(idArtist, response) {
             }
             return idReleases;
         }
-        //apiGetCover(idArtist.releases[0].id);
         apiGetCover(idReleases());
-        
-
-        // idTitre = dataId.target.attributes[4].nodeValue;
-        // duree = idArtist.length;
-        // METTRE TOUS LES ELEMENTS DANS LES PARAMETRES
-        // apiModal(idArtist);
     });
 
 
 
     /// EVENEMENTS A LA FERMTURE DE LA MODALE : SUPPRESSION
-    // modalFade.addEventListener('hidden.bs.modal', function () {
-    //     modalBody.textContent = null;
-    // });
+    modalFade.addEventListener('hidden.bs.modal', function () {
+        modalBody.textContent = null;
+    });
 
 
     
@@ -336,38 +321,35 @@ function titleResult(idArtist, response) {
 
 
 
-
-
-// function apiModal(idArtist){
-//     const resultModal = document.querySelector("#resultModal");
-
-
-//     Création de l'article (container)
-//     let myModal = document.createElement("article");
-//     myModal.textContent = "id titre : " + idTitre + " + durée : " + duree + " mms + ";
-//     myModal.className = "myModal";
-
-
-// }
+/// RAPPEL DE LA FONCTION AVEC UN OFFSET DIFFERENT
+let countOffset = 0;
+BTN_TEST.addEventListener("click", () => {
+    apiGetArtist(INPUT_VALUE.value);
+    countOffset++;
+});
 
 
 
-
-function coverResult(idRelease){
-    // Constante pour recuperer le body de la modal
+/// AFFICHAGE DES INFORMATIONS DANS LA MODAL
+function modalResult(duree, titre, artiste, album, tag){
     const resultModal = document.querySelector("#resultModal");
 
-    // Création de l'article (container)
-    let myRelease = document.createElement("article");
-        myRelease.className = "myRelease";
+    let myModal = document.createElement("p");
+        myModal.textContent = duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag;
+        myModal.className = "myModal";
+
+    resultModal.appendChild(myModal);
+}
 
 
-    // Affichages image
-    let newReleaseCover = document.createElement("img");
-        newReleaseCover.className = "myRecordId";
-        newReleaseCover.setAttribute('src', idRelease.thumbnails.small);
-    myRelease.appendChild(newReleaseCover);
 
+// AFFICHAGE DES COVERS DANS LA MODAL
+function coverResult(idRelease){
+    const resultModal = document.querySelector("#resultModal");
 
-    resultModal.appendChild(myRelease);
+    let imgCover = document.createElement("img");
+        imgCover.className = "imgCoverId";
+        imgCover.setAttribute('src', idRelease.thumbnails.small);
+
+    resultModal.appendChild(imgCover);
 }

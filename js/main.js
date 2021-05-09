@@ -5,7 +5,9 @@ SEARCH_FORM.addEventListener("submit", (ev) => {
     if (SELECT_FORM.value == "artiste") {
         apiGetArtist(INPUT_VALUE.value);
 
-        INPUT_VALUE.value = null;
+        // REINITIALISATION DES VARIABLES AVANT DE BOUCLER
+        NB_RESULT_LINE = 0;
+        FIRST_TIME = false;
     } 
     else if (SELECT_FORM.value == "titre") {
         console.log("input sélectionné : titre");
