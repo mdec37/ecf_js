@@ -8,13 +8,17 @@
 
     <title>MY MUSIC APP - ECF JS Marion</title>
 
+
     <link rel="stylesheet" href="css/base.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Carter+One&family=Hind&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="css/main.css">
 
-    
+    <link rel="stylesheet" href="css/main.css">
 </head>
+
 
 <body class="background-section">    
     <header>
@@ -35,7 +39,7 @@
                             <!-- <label for="search">Votre recherche</label> -->
                             <input type="text" name="search" id="search" placeholder="Entrez votre recherche">
                         </div>
-                        <div class="form-select">
+                        <div class="formSelect">
                             <!-- <label for="search-select">Le type de recherche</label> -->
                             <select name="search-select" id="search-select">
                                 <option value="filtre">Filtres</option>
@@ -46,7 +50,7 @@
                             </select>
                         </div>
                         <div class="form-button flex">
-                            <input type="submit" value="Envoyer" id="envoyer">
+                            <input type="submit" value="Envoyer" id="buttonSubmit">
                         </div>
                     </form>
                 </div>
@@ -57,9 +61,9 @@
 
     <main class="">
         <div class="container">
-            <section class="container-response">
-                <p class="result-sentence">XXX résultat(s) pour la recherche XXX</p>
-                <table>
+            <section class="container-response" id="container-response">
+                <p class="result-sentence">Veuillez faire une recherche</p>
+                <!-- <table>
                     <thead>
                         <tr>
                             <th class="number">#</th>
@@ -69,7 +73,7 @@
                             <th class="actions">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <div>
                         <tr>
                             <td>1</td>
                             <td>Daft Punk</td>
@@ -174,8 +178,8 @@
                             <td>Album 3</td>
                             <td><a href="#"><img class="icon-plus" src="img/plus.svg" alt="Icone pour plus d'informations"></a></td>
                         </tr>
-                    </tbody>
-                </table>
+                    </div>
+                </table> -->
                 
             </section>
         </div>
@@ -188,9 +192,12 @@
         </div>
     </footer>
 
-    <!-- <script src="js/dom.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="js/constantes.js"></script>
     <script src="js/api.js"></script>
-    <script src="js/main.js"></script> -->
+    <script src="js/dom.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 

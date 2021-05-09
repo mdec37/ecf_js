@@ -1,8 +1,8 @@
 /* Set root font-size @10px equivalent */
 html {
-    font-size: .625em; /* fallback IE8+ */
-    font-size: calc(1em * .625); /* IE9-IE11 math fixing. See http://bit.ly/1g4X0bX */
-    scroll-behavior: smooth;
+  font-size: .625em !important; /* fallback IE8+ */
+  font-size: calc(1em * .625) !important; /* IE9-IE11 math fixing. See http://bit.ly/1g4X0bX */
+  scroll-behavior: smooth !important;
 }
 
 /* Box sizing rules */
