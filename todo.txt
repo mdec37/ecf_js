@@ -14,3 +14,5 @@
 1 // Numéro de lignes (main.js)
 
 2 // Gérer si pas d'id de release pour le bouton (dom.js)
+
+3 // Corriger la durée des chansons (dom.js)

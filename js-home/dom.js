@@ -104,6 +104,7 @@ function apiResultRecords(idArtist, response) {
         if(idArtist.title){
             let recordName = document.createElement("span");
             recordName.textContent = " TITRE : " + idArtist.title + " ";
+            recordName.id = idArtist.id;
             myRecording.appendChild(recordName);
         }
     
@@ -191,16 +192,90 @@ function apiResultRecords(idArtist, response) {
 
 
 
+
         /// EVENEMENTS A L'OUVERTURE DE LA MODAL : AFFICHAGE
         modalFade.addEventListener('shown.bs.modal', function () {
-            modalBody.textContent = null;
+            //modalBody.textContent = null;
+        
+            
 
             // Vérifier qu'il y a une durée
-            if(idArtist.length){
-                let lengthRecord = document.createElement("p");
-                    lengthRecord.textContent = "duréee : " + (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
-                modalBody.appendChild(lengthRecord);
+            // if(idArtist.length){
+            //     let lengthRecord = document.createElement("p");
+            //         lengthRecord.textContent = "duréee : " + (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
+            //     modalBody.appendChild(lengthRecord);
 
+
+            //     function millisToMinutesAndSeconds(millis) {
+            //         let minutes = Math.floor(millis / 60000);
+            //         let seconds = ((millis % 60000) / 1000).toFixed(0);
+            //         return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+            //     }
+            // }
+
+            // Vérifier qu'il y a un titre
+            // if(idArtist.title){
+            //     let nameRecord = document.createElement("p");
+            //         nameRecord.textContent = "title : " + idArtist.title;
+            //     modalBody.appendChild(nameRecord);
+            // }
+
+            // Vérifier qu'il y a un artiste
+            // if(idArtist["artist-credit"]){
+            //     let nameArtist = document.createElement("p");
+            //         // nameArtist.textContent = "nom artiste : " + idArtist["artist-credit"][0].name;
+            //         nameArtist.textContent =  " nom artiste : " + forArtistName() + " ";
+            //     modalBody.appendChild(nameArtist);
+                    
+            //     function forArtistName () {
+            //         let artisteName = '';
+            //         for (var i = 0; i < idArtist["artist-credit"].length; i++) {
+            //             artisteName += idArtist["artist-credit"][i].name + " + ";
+            //         }
+            //         return artisteName;
+            //     }
+            // }
+            
+            // // Vérifier qu'il y a des albums
+            // if(idArtist.releases){
+            //     let nameReleases = document.createElement("p");
+            //         //nameReleases.textContent = "nom album: " + idArtist.releases[0].title;
+            //         nameReleases.textContent =  " nom album : " + forReleaseName() + " ";
+            //     modalBody.appendChild(nameReleases);
+                    
+            //     function forReleaseName () {
+            //         let releaseName = '';
+            //         for (var i = 0; i < idArtist.releases.length; i++) {
+            //             releaseName += idArtist.releases[i].title + " + ";
+            //         }
+            //         return releaseName;
+            //     }
+            // }
+            
+            // Vérifier qu'il y a des genres
+            // if(idArtist.tags){
+            //     let tags = document.createElement("p");
+            //         //tags.textContent = "genre : " + idArtist.tags[0].name;
+            //         tags.textContent =  " genre : " + forTags() + " ";
+            //     modalBody.appendChild(tags);
+                    
+            //     function forTags () {
+            //         let tagsName = '';
+            //         for (var i = 0; i < idArtist.tags.length; i++) {
+            //             tagsName += idArtist.tags[i].name + " + ";
+            //         }
+            //         return tagsName;
+            //     }
+            // }
+        });
+
+
+
+        /// EVENEMENTS AU CLIC DU BOUTON : AFFICHAGE DES COVERS
+        btnInfo.addEventListener("click", () => {
+            // Vérifier qu'il y a une durée
+            if(idArtist.length){
+                duree = "duréee : " + (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
 
                 function millisToMinutesAndSeconds(millis) {
                     let minutes = Math.floor(millis / 60000);
@@ -211,17 +286,12 @@ function apiResultRecords(idArtist, response) {
 
             // Vérifier qu'il y a un titre
             if(idArtist.title){
-                let nameRecord = document.createElement("p");
-                    nameRecord.textContent = "title : " + idArtist.title;
-                modalBody.appendChild(nameRecord);
+                titre = "title : " + idArtist.title;
             }
 
             // Vérifier qu'il y a un artiste
             if(idArtist["artist-credit"]){
-                let nameArtist = document.createElement("p");
-                    // nameArtist.textContent = "nom artiste : " + idArtist["artist-credit"][0].name;
-                    nameArtist.textContent =  " nom artiste : " + forArtistName() + " ";
-                modalBody.appendChild(nameArtist);
+                    artiste =  " nom artiste : " + forArtistName() + " ";
                     
                 function forArtistName () {
                     let artisteName = '';
@@ -231,13 +301,10 @@ function apiResultRecords(idArtist, response) {
                     return artisteName;
                 }
             }
-            
+
             // Vérifier qu'il y a des albums
             if(idArtist.releases){
-                let nameReleases = document.createElement("p");
-                    //nameReleases.textContent = "nom album: " + idArtist.releases[0].title;
-                    nameReleases.textContent =  " nom album : " + forReleaseName() + " ";
-                modalBody.appendChild(nameReleases);
+                album = " nom album : " + forReleaseName() + " ";
                     
                 function forReleaseName () {
                     let releaseName = '';
@@ -247,13 +314,10 @@ function apiResultRecords(idArtist, response) {
                     return releaseName;
                 }
             }
-            
+
             // Vérifier qu'il y a des genres
             if(idArtist.tags){
-                let tags = document.createElement("p");
-                    //tags.textContent = "genre : " + idArtist.tags[0].name;
-                    tags.textContent =  " genre : " + forTags() + " ";
-                modalBody.appendChild(tags);
+                tag = " genre : " + forTags() + " ";
                     
                 function forTags () {
                     let tagsName = '';
@@ -263,12 +327,10 @@ function apiResultRecords(idArtist, response) {
                     return tagsName;
                 }
             }
-        });
+
+            apiModal(duree, titre, artiste, album, tag = null);
 
 
-
-        /// EVENEMENTS AU CLIC DU BOUTON : AFFICHAGE DES COVERS
-        btnInfo.addEventListener("click", () => {
             // Récupérer tous les id des albums qu'on passe en paramètres de APIGETCOVER qui appel les cover
             function idReleases () {
                 let idReleases = '';
@@ -277,22 +339,15 @@ function apiResultRecords(idArtist, response) {
                 }
                 return idReleases;
             }
-            //apiGetCover(idArtist.releases[0].id);
             apiGetCover(idReleases());
-            
-
-            // idTitre = dataId.target.attributes[4].nodeValue;
-            // duree = idArtist.length;
-            // METTRE TOUS LES ELEMENTS DANS LES PARAMETRES
-            // apiModal(idArtist);
         });
 
 
 
         /// EVENEMENTS A LA FERMTURE DE LA MODALE : SUPPRESSION
-        // modalFade.addEventListener('hidden.bs.modal', function () {
-        //     modalBody.textContent = null;
-        // });
+        modalFade.addEventListener('hidden.bs.modal', function () {
+            modalBody.textContent = null;
+        });
 
 
         
@@ -318,17 +373,18 @@ function apiResultRecords(idArtist, response) {
 
 
 
-// function apiModal(idArtist){
-//     const resultModal = document.querySelector("#resultModal");
+function apiModal(duree, titre, artiste, album, tag){
+    const resultModal = document.querySelector("#resultModal");
 
 
-//     Création de l'article (container)
-//     let myModal = document.createElement("article");
-//     myModal.textContent = "id titre : " + idTitre + " + durée : " + duree + " mms + ";
-//     myModal.className = "myModal";
+    let myModal = document.createElement("p");
+    console.log(" + " + duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag);
+    myModal.textContent = " + " + duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag;
+    myModal.className = "myModal";
 
+    resultModal.appendChild(myModal);
 
-// }
+}
 
 
 
