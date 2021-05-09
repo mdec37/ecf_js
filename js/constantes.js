@@ -11,6 +11,7 @@ const SELECT_FORM = document.querySelector("#search-select");
 const CONTAINER_RESPONSE = document.querySelector("#container-response");
 
 const TABLE = document.createElement("table");
+const THEAD = document.createElement("thead");
 const TBODY = document.createElement("tbody");
 
 const BTN_TEST = document.querySelector("#test");

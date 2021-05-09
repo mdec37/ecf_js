@@ -1,6 +1,7 @@
 SEARCH_FORM.addEventListener("submit", (ev) => {
     ev.preventDefault();
     CONTAINER_RESPONSE.textContent = "";
+    TABLE.textContent = "";
 
     if (SELECT_FORM.value == "artiste") {
         apiGetArtist(INPUT_VALUE.value);

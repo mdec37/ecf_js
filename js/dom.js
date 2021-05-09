@@ -38,7 +38,6 @@ function titleResult(idArtist, response) {
 
 
         /// Création du tableau
-        let thead = document.createElement("thead");
         let tr = document.createElement("tr");
         let thNumber = document.createElement("th");
             thNumber.className = "number";
@@ -60,8 +59,8 @@ function titleResult(idArtist, response) {
             thActions.className = "actions";
             thActions.textContent = "Info";
         tr.appendChild(thActions);
-        thead.appendChild(tr);
-        TABLE.appendChild(thead);
+        THEAD.appendChild(tr);
+        TABLE.appendChild(THEAD);
 
         TABLE.appendChild(TBODY);
         CONTAINER_RESPONSE.appendChild(TABLE);
