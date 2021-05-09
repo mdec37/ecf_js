@@ -1,18 +1,3 @@
-// const MUSICBRAINZ_API_URL = "https://musicbrainz.org/ws/2/";
-// const COVERARCHIVE_API_URL = "https://coverartarchive.org/";
-
-// const artistZone = document.querySelector("#results_container");
-// const searchForm = document.querySelector("#search_artist_form");
-// const inputSearch = document.querySelector("#inputSearch");
-// const resultsZone = document.querySelector("#results_container");
-// const artistName = document.querySelector("#artist");
-// const bodyContainer = document.body;
-
-
-// const selectForm = document.querySelector("#search-select");
-
-
-
 const MUSICBRAINZ_API_URL = "https://musicbrainz.org/ws/2/";
 const COVERARCHIVE_API_URL = "https://coverartarchive.org/";
 

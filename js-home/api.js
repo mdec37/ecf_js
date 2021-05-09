@@ -22,7 +22,7 @@ function apiGetArtist(result) {
 // RECUPERER LES TITRES DE L'ARTISTE EN FONCTION DE SON ID
 function apiGetArtistTitre(idArtist) {
     const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=arid:" + encodeURIComponent(idArtist) + "&limit=100&offset=0&fmt=json", true);
+    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=arid:" + encodeURIComponent(idArtist) + "&limit=100&offset="+ countOffset + "&fmt=json", true);
     request.addEventListener("readystatechange", () => {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {

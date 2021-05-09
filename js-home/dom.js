@@ -27,39 +27,39 @@ function apiResult(result, response) {
 }
 
 
-
 // INITIALISATION DES VARIABLES AVANT DE BOUCLER
-let nbLineResult = 0;
+let countResponse = 0;
 let premiereFois = false;
+
 
 // AFFICHAGE DES RESULTATS / LISTE DES RESULTATS / MODALE
 function apiResultRecords(idArtist, response) {
-    nbLineResult += 1;
+    countResponse += 1;
 
     console.log(idArtist, response);
 
     
     // RESULTAT DE LA RECHERCHE A AFFICHER QU'UNE SEULE FOIS
     if (!premiereFois){
-            // Création de l'article (container)
-            let myArtist = document.createElement("article");
+        // Création de l'article (container)
+        let myArtist = document.createElement("article");
 
-            let recherche = document.createElement("span");
-            recherche.textContent = "Résultat de la recherche pour : ";
-            myArtist.appendChild(recherche);
+        let recherche = document.createElement("span");
+        recherche.textContent = "Résultat de la recherche pour : ";
+        myArtist.appendChild(recherche);
 
-            // Création du nom de l'artiste et attribution
-            let newArtisteName = document.createElement("span");
-            newArtisteName.textContent = " nom de l'artiste : " + idArtist["artist-credit"][0].name + " - ";
-            myArtist.appendChild(newArtisteName);
+        // Création du nom de l'artiste et attribution
+        let newArtisteName = document.createElement("span");
+        newArtisteName.textContent = " nom de l'artiste : " + idArtist["artist-credit"][0].name + " - ";
+        myArtist.appendChild(newArtisteName);
 
-            // // Création du nombre de recherche
-            let newArtisteNombre = document.createElement("span");
-            newArtisteNombre.textContent = " nombre de résultat : " + response.count;
-            myArtist.appendChild(newArtisteNombre);
+        // // Création du nombre de recherche
+        let newArtisteNombre = document.createElement("span");
+        newArtisteNombre.textContent = " nombre de résultat : " + response.count;
+        myArtist.appendChild(newArtisteNombre);
 
-            // Ici j'intègre l'article à l'espace principal
-            resultsZone.appendChild(myArtist);
+        // Ici j'intègre l'article à l'espace principal
+        resultsZone.appendChild(myArtist);
 
         premiereFois = true;
     }
@@ -74,7 +74,7 @@ function apiResultRecords(idArtist, response) {
 
         /// 0 - AFFICHER LE NUMERO DE LA LIGNE
         let nbLine = document.createElement("span");
-        nbLine.textContent =  " Ligne : " + nbLineResult + " - ";
+        nbLine.textContent =  " Ligne : " + countResponse + " - ";
         
         myRecording.appendChild(nbLine);
 
@@ -274,6 +274,7 @@ function apiResultRecords(idArtist, response) {
         /// EVENEMENTS AU CLIC DU BOUTON : AFFICHAGE DES COVERS
         btnInfo.addEventListener("click", () => {
             // Vérifier qu'il y a une durée
+
             if(idArtist.length){
                 duree = "duréee : " + (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
 
@@ -328,7 +329,7 @@ function apiResultRecords(idArtist, response) {
                 }
             }
 
-            apiModal(duree, titre, artiste, album, tag = null);
+            apiModal(duree, titre, artiste, album, tag = "");
 
 
             // Récupérer tous les id des albums qu'on passe en paramètres de APIGETCOVER qui appel les cover
@@ -369,7 +370,17 @@ function apiResultRecords(idArtist, response) {
     resultsZone.appendChild(myRecording);
 }
 
+let countOffset = 0;
+let btnTest = document.querySelector("#test");
 
+btnTest.addEventListener("click", () => {
+    apiGetArtist(artistName.value);
+    countOffset++;
+
+});
+
+//Si le count est sup au nombre de résultat, arrêter l'affichage + bouton plus d'insponible
+// limiter le offset / titre que l'on veut afficher
 
 
 
@@ -378,8 +389,10 @@ function apiModal(duree, titre, artiste, album, tag){
 
 
     let myModal = document.createElement("p");
-    console.log(" + " + duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag);
-    myModal.textContent = " + " + duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag;
+    //console.log(" + " + duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag);
+
+    myModal.textContent = duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag;
+
     myModal.className = "myModal";
 
     resultModal.appendChild(myModal);
@@ -394,16 +407,16 @@ function apiCover(idRelease){
     const resultModal = document.querySelector("#resultModal");
 
     // Création de l'article (container)
-    let myRelease = document.createElement("article");
-        myRelease.className = "myRelease";
+    // let myRelease = document.createElement("article");
+    //     myRelease.className = "myRelease";
 
 
     // Affichages image
     let newReleaseCover = document.createElement("img");
         newReleaseCover.className = "myRecordId";
         newReleaseCover.setAttribute('src', idRelease.thumbnails.small);
-    myRelease.appendChild(newReleaseCover);
+    // myRelease.appendChild(newReleaseCover);
 
 
-    resultModal.appendChild(myRelease);
+    resultModal.appendChild(newReleaseCover);
 }

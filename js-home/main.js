@@ -11,7 +11,6 @@ searchForm.addEventListener("submit", (ev) => {
         // REINITIALISATION DES VARIABLES AVANT DE BOUCLER
         nbLineResult = 0;
         premiereFois = false;
-        artistName.value = null;
     } 
     else if (selectForm.value == "titre") {
         console.log("input sélectionné : titre");
