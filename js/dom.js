@@ -34,36 +34,36 @@ function titleResult(idArtist, response) {
             resultSentence.className = "result-sentence";
             resultSentence.textContent = response.count + " résultat(s) pour la recherche : " + idArtist["artist-credit"][0].name;
         
-        CONTAINER_RESPONSE.appendChild(resultSentence);
+        RESULT_SENTENCE.appendChild(resultSentence);
 
 
-        /// Création du tableau
-        let tr = document.createElement("tr");
-        let thNumber = document.createElement("th");
-            thNumber.className = "number";
-            thNumber.textContent = "#";
-        tr.appendChild(thNumber);
-        let thArtist = document.createElement("th");
-            thArtist.className = "artist";
-            thArtist.textContent = "Artiste";
-        tr.appendChild(thArtist);
-        let thTitle = document.createElement("th");
-            thTitle.className = "title";
-            thTitle.textContent = "Titre";
-        tr.appendChild(thTitle);
-        let thAlbum = document.createElement("th");
-            thAlbum.className = "album";
-            thAlbum.textContent = "Album";
-        tr.appendChild(thAlbum);
-        let thActions = document.createElement("th");
-            thActions.className = "actions";
-            thActions.textContent = "Info";
-        tr.appendChild(thActions);
-        THEAD.appendChild(tr);
-        TABLE.appendChild(THEAD);
+        // /// Création du tableau
+        // let tr = document.createElement("tr");
+        // let thNumber = document.createElement("th");
+        //     thNumber.className = "number";
+        //     thNumber.textContent = "#";
+        // tr.appendChild(thNumber);
+        // let thArtist = document.createElement("th");
+        //     thArtist.className = "artist";
+        //     thArtist.textContent = "Artiste";
+        // tr.appendChild(thArtist);
+        // let thTitle = document.createElement("th");
+        //     thTitle.className = "title";
+        //     thTitle.textContent = "Titre";
+        // tr.appendChild(thTitle);
+        // let thAlbum = document.createElement("th");
+        //     thAlbum.className = "album";
+        //     thAlbum.textContent = "Album";
+        // tr.appendChild(thAlbum);
+        // let thActions = document.createElement("th");
+        //     thActions.className = "actions";
+        //     thActions.textContent = "Info";
+        // tr.appendChild(thActions);
+        // THEAD.appendChild(tr);
+        // TABLE.appendChild(THEAD);
 
-        TABLE.appendChild(TBODY);
-        CONTAINER_RESPONSE.appendChild(TABLE);
+        // TABLE.appendChild(TBODY);
+        // CONTAINER_RESPONSE.appendChild(TABLE);
 
 
         FIRST_TIME = true;
@@ -315,7 +315,7 @@ function titleResult(idArtist, response) {
 
     trBody.appendChild(tdButton);
 
-    TBODY.appendChild(trBody);
+    CONTAINER_BODY.appendChild(trBody);
 }
 
 

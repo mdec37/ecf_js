@@ -1,14 +1,15 @@
 SEARCH_FORM.addEventListener("submit", (ev) => {
     ev.preventDefault();
-    CONTAINER_RESPONSE.textContent = "";
-    TABLE.textContent = "";
+    RESULT_SENTENCE.textContent = null;
+    CONTAINER_BODY.textContent = null;
+
 
     if (SELECT_FORM.value == "artiste") {
-        apiGetArtist(INPUT_VALUE.value);
-
         // REINITIALISATION DES VARIABLES AVANT DE BOUCLER
         NB_RESULT_LINE = 0;
         FIRST_TIME = false;
+        
+        apiGetArtist(INPUT_VALUE.value);
     } 
     else if (SELECT_FORM.value == "titre") {
         console.log("input sélectionné : titre");

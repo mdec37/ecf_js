@@ -27,6 +27,44 @@ function apiResult(result, response) {
 }
 
 
+
+
+
+
+function apiResultRecording(result, response) {
+    if (result) {
+        if (result.score === 100 ) {
+            console.log(result);
+            console.log(response);
+        }
+    } else {
+        resultsZone.textContent = "Il faut saisir quelque chose";
+        console.log("Error : 1 ");
+    }
+}
+
+
+function apiResultRelease(result, response) {
+    if (result) {
+        if (result.score === 100 ) {
+            console.log(result);
+            console.log(response);
+        }
+    
+    } else {
+        resultsZone.textContent = "Il faut saisir quelque chose";
+        console.log("Error : 1 ");
+    }
+}
+
+
+
+
+
+
+
+
+
 // INITIALISATION DES VARIABLES AVANT DE BOUCLER
 let countResponse = 0;
 let premiereFois = false;
