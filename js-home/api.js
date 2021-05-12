@@ -119,18 +119,18 @@ function apiGetRelease(result) {
 
 
 // ALL
-function apiGetAll(result) {
-    const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "?query=recording:"+ encodeURIComponent(result) OR + "artistname:" + encodeURIComponent(result) OR "release:" + encodeURIComponent(result) + "&limit=100&offset=${offset}&fmt=json", true);
-    request.addEventListener("readystatechange", () => {
-        if (request.readyState === XMLHttpRequest.DONE) {
-            if (request.status === 200) {
-                const response = JSON.parse(request.responseText);
-                response.releases.map(result => apiResultAll(result, response));
-            } else {
-                console.log("error");
-            }
-        }
-    });
-    request.send();
-}
+// function apiGetAll(result) {
+//     const request = new XMLHttpRequest();
+//     request.open("GET", MUSICBRAINZ_API_URL + "?query=recording:"+ encodeURIComponent(result) OR + "artistname:" + encodeURIComponent(result) OR "release:" +  + "&limit=100&offset=${offset}&fmt=json", true);
+//     request.addEventListener("readystatechange", () => {
+//         if (request.readyState === XMLHttpRequest.DONE) {
+//             if (request.status === 200) {
+//                 const response = JSON.parse(request.responseText);
+//                 response.releases.map(result => apiResultAll(result, response));
+//             } else {
+//                 console.log("error");
+//             }
+//         }
+//     });
+//     request.send();
+// }
