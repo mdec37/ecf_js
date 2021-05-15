@@ -1,14 +1,9 @@
 /// TO DO 
 
-1 // Modifier le tbody pour gérer le scroll
 
-2 // Faire design pour modal
-
-3 // Gérer les boutons si pas de plus d'informations
-
-4 // Design / affichage des boutons Offset
-
-5 // Ne pas afficher Le haut du tableau à l'ouverture
+---> 2 // Faire design pour modal
 
 
 6 // Recherche album : gérer les autres infos
+
+7 // Recherche ALL

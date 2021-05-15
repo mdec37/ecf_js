@@ -59,11 +59,11 @@
     </header>
     
 
-    <main class="">
+    <main>
         <div class="container">
             <section id="container-response" class="container-response">
                 <p id="result-sentence" class="result-sentence">Veuillez faire une recherche</p>
-                <table>
+                <table id="tableResponse">
                     <thead>
                         <tr>
                             <th class="number">#</th>
@@ -76,19 +76,21 @@
                     <tbody id="tbody">
                         
                     </tbody>
+                    <tfoot>
+                        <tr><th colspan=5 id="footerBtnArtist"><a id="btnArtist">AFFICHER PLUS</a></th></tr>
+                        <tr><th colspan=5 id="footerBtnRecord"><a id="btnRecord">AFFICHER PLUS</a></th></tr>
+                        <tr><th colspan=5 id="footerBtnRelease"><a id="btnRelease">AFFICHER PLUS</a></th></tr>
+                        <tr><th colspan=5 id="footerBtnAll"><a id="btnAll">AFFICHER PLUS</a></th></tr>
+                    </tfoot>
                 </table>
                 
             </section>
-            <button id="btnArtist">PLUS DE TITRES</button>
-            <button id="btnRecord">PLUS DE RECORDS</button>
-            <button id="btnRelease">PLUS DE RELEASES</button>
-            <button id="btnAll">PLUS DE ALL</button>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <p><a class="portfolio-link" href="https://mariondeclerck.fr/"> <i>Marion DECLERCK ©</i> </a> - 2021</p>
+            <span><a class="portfolio-link" href="https://mariondeclerck.fr/"> <i>Marion DECLERCK ©</i> </a> - 2021</span>
             <!-- <p>ECF JS</p> -->
         </div>
     </footer>

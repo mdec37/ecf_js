@@ -152,10 +152,9 @@ main .container-response {
     width: 90%;
     margin: 0 auto;
     padding: 1.5rem;
-    padding-top: 0.5rem;
 }
 main .result-sentence {
-    padding-bottom: 0.6rem;
+    padding-bottom: 1rem;
     font-size: 1.5rem;
     color: rgb(63, 63, 63);
     font-style: italic;
@@ -180,7 +179,7 @@ main table thead th {
 }
 main table tbody {
     overflow: scroll;
-    max-height: 46vh;
+    max-height: 45vh;
     display: block;
 }
 main table tbody tr:nth-child(even) {
@@ -229,6 +228,7 @@ main table tbody td:nth-child(4) {
 main table thead .actions {
     width: 13rem;
     text-align: center;
+    padding-left: 4rem;
 }
 main table tbody td:nth-child(5){
     width: 13rem;
@@ -244,8 +244,7 @@ main table .icon-plus {
     width: 2rem;
     height: 2rem;
     margin-left: 1.5rem;
-}
-main table .icon-cross {
+}main table .icon-cross {
     width: 1.5rem;
     height: 1.5rem;
     margin-left: 1.5rem;
@@ -255,7 +254,7 @@ main table .icon-cross {
 
 /** FOOTER **/
 footer {
-    position: absolute;
+    position: relative;
     font-size: 1.2rem;
     color: #161616;
     text-align: right;
@@ -272,20 +271,9 @@ footer .portfolio-link {
 
 
 /* tfoot btn offset */
-tfoot, tfoot tr, tfoot th {
+tfoot tr td {
     display: block;
-    width: 100%;
-}
-tfoot th {
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.4rem;
-
-    color: rgb(235, 235, 235);
-    background-color: rgba(43, 43, 43, 0.76);
-}
-tfoot th:hover {
-    background-color: rgba(43, 43, 43);
+    margin: auto;
 }
 
 /* btn offset */

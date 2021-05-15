@@ -12,7 +12,6 @@ SEARCH_FORM.addEventListener("submit", (ev) => {
     FOOTER_BTN_ARTIST.style.display = "none";
     FOOTER_BTN_RECORD.style.display = "none";
     FOOTER_BTN_RELEASE.style.display = "none";
-    FOOTER_BTN_ALL.style.display = "none";
 
     // EFFACER LE HEADER TABLE
     TABLE_HEADER.style.display = "none";
@@ -38,30 +37,22 @@ SEARCH_FORM.addEventListener("submit", (ev) => {
             
             apiGetArtist(INPUT_VALUE.value);
 
-            setTimeout(function(){
-                FOOTER_BTN_ARTIST.style.display = "block";
-            }, 500);
+            FOOTER_BTN_ARTIST.style.display = "block";
         } 
         else if (SELECT_FORM.value == "titre") {
             apiGetRecord(INPUT_VALUE.value);
 
-            setTimeout(function(){
-                FOOTER_BTN_RECORD.style.display = "block";
-            }, 500);
+            FOOTER_BTN_RECORD.style.display = "block";
             console.log("input sélectionné : titre");
         } 
         else if (SELECT_FORM.value == "album") {
             apiGetRelease(INPUT_VALUE.value);
 
-            setTimeout(function(){
-                FOOTER_BTN_RELEASE.style.display = "block";
-            }, 500);
+            FOOTER_BTN_RELEASE.style.display = "block";
             console.log("input sélectionné : album");
         } 
         else if (SELECT_FORM.value == "all") {
-            setTimeout(function(){
-                FOOTER_BTN_ALL.style.display = "block";
-            }, 500);
+            FOOTER_BTN_ALL.style.display = "block";
             console.log("input sélectionné : all");
         }
     },1200);
