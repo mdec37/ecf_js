@@ -6,6 +6,36 @@ const artistName = document.querySelector("#artist");
 const bodyContainer = document.body;
 
 
+///£ AJOUT DES BOUTONS POUR LES AUTRES RESULTATS
+let countOffset = 0;
+let btnTestArtist = document.querySelector("#testArtist");
+let btnTestRecord = document.querySelector("#testRecord");
+let btnTestRelease = document.querySelector("#testReleases");
+let btnTestAll = document.querySelector("#testAll");
+
+btnTestArtist.addEventListener("click", () => {
+    
+    countOffset++;
+    apiGetArtist(artistName.value);
+});
+btnTestRecord.addEventListener("click", () => {
+    countOffset++;
+    apiGetRecord(artistName.value);
+});
+btnTestRelease.addEventListener("click", () => {
+    countOffset++;
+    apiGetRelease(artistName.value);
+});
+// btnTestAll.addEventListener("click", () => {
+//     apiGetArtist(artistName.value);
+//     countOffset++;
+// });
+
+//Si le count est sup au nombre de résultat, arrêter l'affichage + bouton plus d'insponible
+// limiter le offset / titre que l'on veut afficher
+
+
+
 // APPEL DE LA FUNCTION APIGETARTISTETITRE A L'AIDE DE L'ID DE L'ARTITSTE QU'ON VIENT DE RECUPERER
 function apiResult(result, response) {
     if (result) {
@@ -553,14 +583,9 @@ function apiResultRelease(result, response) {
 
 
 
-
-
-
-
 // INITIALISATION DES VARIABLES AVANT DE BOUCLER
 let countResponse = 0;
 let premiereFois = false;
-
 
 // AFFICHAGE DES RESULTATS / LISTE DES RESULTATS / MODALE
 function apiResultRecords(idArtist, response) {
@@ -571,6 +596,7 @@ function apiResultRecords(idArtist, response) {
     
     // RESULTAT DE LA RECHERCHE A AFFICHER QU'UNE SEULE FOIS
     if (!premiereFois){
+        
         // Création de l'article (container)
         let myArtist = document.createElement("article");
 
@@ -829,36 +855,6 @@ function apiResultRecords(idArtist, response) {
     resultsZone.appendChild(myRecording);
 }
 
-
-
-
-///£ AJOUT DES BOUTONS POUR LES AUTRES RESULTATS
-let countOffset = 0;
-let btnTestArtist = document.querySelector("#testArtist");
-let btnTestRecord = document.querySelector("#testRecord");
-let btnTestRelease = document.querySelector("#testReleases");
-let btnTestAll = document.querySelector("#testAll");
-
-btnTestArtist.addEventListener("click", () => {
-    
-    countOffset++;
-    apiGetArtist(artistName.value);
-});
-btnTestRecord.addEventListener("click", () => {
-    countOffset++;
-    apiGetRecord(artistName.value);
-});
-btnTestRelease.addEventListener("click", () => {
-    countOffset++;
-    apiGetRelease(artistName.value);
-});
-// btnTestAll.addEventListener("click", () => {
-//     apiGetArtist(artistName.value);
-//     countOffset++;
-// });
-
-//Si le count est sup au nombre de résultat, arrêter l'affichage + bouton plus d'insponible
-// limiter le offset / titre que l'on veut afficher
 
 
 

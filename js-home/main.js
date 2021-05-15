@@ -1,4 +1,5 @@
 const selectForm = document.querySelector("#search-select");
+const spinnerBorder = document.querySelector("#spinner-border");
 
 
 searchForm.addEventListener("submit", (ev) => {
@@ -9,6 +10,7 @@ searchForm.addEventListener("submit", (ev) => {
     resultsZone.textContent = "";
     premiereFois = false;
     countOffset = 0;
+
     // SUPPRESSION DE TOUS LES BOUTONS
     btnTestArtist.style.display = "none";
     btnTestRecord.style.display = "none";
