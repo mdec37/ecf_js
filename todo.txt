@@ -4,17 +4,11 @@
 
 2 // Faire design pour modal
 
-3 // Les recherches à la suite ne fonctionnent pas sans refresh la page sur le projet main
+3 // Gérer les boutons si pas de plus d'informations
+
+4 // Design / affichage des boutons Offset
+
+5 // Ne pas afficher Le haut du tableau à l'ouverture
 
 
-
-
-
-/// DO
-1 // Numéro de lignes (main.js)
-
-2 // Gérer si pas d'id de release pour le bouton (dom.js)
-
-3 // Corriger la durée des chansons (dom.js)
-
-4 // Offset
+6 // Recherche album : gérer les autres infos

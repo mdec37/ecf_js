@@ -261,3 +261,6 @@ footer .portfolio-link {
 }
 
 
+#btnArtist, #btnRecord, #btnRelease, #btnAll{
+    display: none;
+}
