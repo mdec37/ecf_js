@@ -182,7 +182,7 @@ function titleResult(idArtist, response) {
     let modalTitle = document.createElement("h2");
         modalTitle.className = "modal-title";
         modalTitle.id = "exampleModalLabel";
-        modalTitle.textContent = "Fenetre Modal";
+        modalTitle.textContent = "INFORMATIONS";
     modalHeader.appendChild(modalTitle);
 
     let modalBtn = document.createElement("button");
@@ -204,7 +204,7 @@ function titleResult(idArtist, response) {
     btnInfo.addEventListener("click", () => {
         // Vérifier qu'il y a une durée
         if(idArtist.length){
-            duree = "duréee : " + (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
+            duree = (millisToMinutesAndSeconds(idArtist.length)) + " minutes";
 
             function millisToMinutesAndSeconds(millis) {
                 let minutes = Math.floor(millis / 60000);
@@ -215,17 +215,21 @@ function titleResult(idArtist, response) {
 
         // Vérifier qu'il y a un titre
         if(idArtist.title){
-            titre = "title : " + idArtist.title;
+            titre = idArtist.title;
         }
 
         // Vérifier qu'il y a un artiste
         if(idArtist["artist-credit"]){
-            artiste =  " nom artiste : " + forArtistName() + " ";
+            artiste = forArtistName();
                 
             function forArtistName () {
                 let artisteName = '';
                 for (var i = 0; i < idArtist["artist-credit"].length; i++) {
-                    artisteName += idArtist["artist-credit"][i].name + " + ";
+                    artisteName += idArtist["artist-credit"][i].name + " feat ";
+                }
+                let lastCharacter = artisteName.slice(-5, -1);
+                if(lastCharacter == "feat"){
+                    artisteName = artisteName.slice(0, -6);
                 }
                 return artisteName;
             }
@@ -233,12 +237,16 @@ function titleResult(idArtist, response) {
 
         // Vérifier qu'il y a des albums
         if(idArtist.releases){
-            album = " nom album : " + forReleaseName() + " ";
+            album = forReleaseName();
                 
             function forReleaseName () {
                 let releaseName = '';
                 for (var i = 0; i < idArtist.releases.length; i++) {
-                    releaseName += idArtist.releases[i].title + " + ";
+                    releaseName += idArtist.releases[i].title + " &";
+                }
+                let lastCharacter = releaseName.slice(-1);
+                if(lastCharacter == "&"){
+                    releaseName = releaseName.slice(0, -2);
                 }
                 return releaseName;
             }
@@ -246,12 +254,16 @@ function titleResult(idArtist, response) {
 
         // Vérifier qu'il y a des genres
         if(idArtist.tags){
-            tag = " genre : " + forTags() + " ";
+            tag = forTags();
                 
             function forTags () {
                 let tagsName = '';
                 for (var i = 0; i < idArtist.tags.length; i++) {
-                    tagsName += idArtist.tags[i].name + " + ";
+                    tagsName += idArtist.tags[i].name + " -";
+                }
+                let lastCharacter = tagsName.slice(-1);
+                if(lastCharacter == "-"){
+                    tagsName = tagsName.slice(0, -2);
                 }
                 return tagsName;
             }
@@ -291,7 +303,7 @@ function titleResult(idArtist, response) {
         modalBtnClose.className = "btn btn-secondary";
         modalBtnClose.setAttribute('data-bs-dismiss', 'modal');
         modalBtnClose.setAttribute('type', 'button');
-        modalBtnClose.textContent = 'Close';
+        modalBtnClose.textContent = 'CLOSE';
     modalFooter.appendChild(modalBtnClose);
 
 
@@ -457,7 +469,7 @@ function apiResultRecording(result, response) {
         let modalTitle = document.createElement("h2");
             modalTitle.className = "modal-title";
             modalTitle.id = "exampleModalLabel";
-            modalTitle.textContent = "Fenetre Modal";
+            modalTitle.textContent = "INFORMATIONS";
         modalHeader.appendChild(modalTitle);
 
         let modalBtn = document.createElement("button");
@@ -479,7 +491,7 @@ function apiResultRecording(result, response) {
         btnInfo.addEventListener("click", () => {
             // Vérifier qu'il y a une durée
             if(result.length){
-                duree = "duréee : " + (millisToMinutesAndSeconds(result.length)) + " minutes";
+                duree = (millisToMinutesAndSeconds(result.length)) + " minutes";
 
                 function millisToMinutesAndSeconds(millis) {
                     let minutes = Math.floor(millis / 60000);
@@ -490,17 +502,21 @@ function apiResultRecording(result, response) {
 
             // Vérifier qu'il y a un titre
             if(result.title){
-                titre = "title : " + result.title;
+                titre = result.title;
             }
 
             // Vérifier qu'il y a un artiste
             if(result["artist-credit"]){
-                    artiste = " nom artiste : " + forArtistName() + " ";
+                    artiste = forArtistName();
                     
                 function forArtistName () {
                     let artisteName = '';
                     for (var i = 0; i < result["artist-credit"].length; i++) {
-                        artisteName += result["artist-credit"][i].name + " + ";
+                        artisteName += result["artist-credit"][i].name + " feat ";
+                    }
+                    let lastCharacter = artisteName.slice(-5, -1);
+                    if(lastCharacter == "feat"){
+                        artisteName = artisteName.slice(0, -6);
                     }
                     return artisteName;
                 }
@@ -508,12 +524,16 @@ function apiResultRecording(result, response) {
 
             // Vérifier qu'il y a des albums
             if(result.releases){
-                album = " nom album : " + forReleaseName() + " ";
+                album = forReleaseName();
                     
                 function forReleaseName () {
                     let releaseName = '';
                     for (var i = 0; i < result.releases.length; i++) {
-                        releaseName += result.releases[i].title + " + ";
+                        releaseName += result.releases[i].title + " &";
+                    }
+                    let lastCharacter = releaseName.slice(-1);
+                    if(lastCharacter == "&"){
+                        releaseName = releaseName.slice(0, -2);
                     }
                     return releaseName;
                 }
@@ -521,12 +541,16 @@ function apiResultRecording(result, response) {
 
             // Vérifier qu'il y a des genres
             if(result.tags){
-                tag = " genre : " + forTags() + " ";
+                tag = forTags();
                     
                 function forTags () {
                     let tagsName = '';
                     for (var i = 0; i < result.tags.length; i++) {
-                        tagsName += result.tags[i].name + " + ";
+                        tagsName += result.tags[i].name + " -";
+                    }
+                    let lastCharacter = tagsName.slice(-1);
+                    if(lastCharacter == "-"){
+                        tagsName = tagsName.slice(0, -2);
                     }
                     return tagsName;
                 }
@@ -566,7 +590,7 @@ function apiResultRecording(result, response) {
             modalBtnClose.className = "btn btn-secondary";
             modalBtnClose.setAttribute('data-bs-dismiss', 'modal');
             modalBtnClose.setAttribute('type', 'button');
-            modalBtnClose.textContent = 'Close';
+            modalBtnClose.textContent = 'CLOSE';
         modalFooter.appendChild(modalBtnClose);
 
 
@@ -718,7 +742,7 @@ function apiResultRelease(result, response) {
         let modalTitle = document.createElement("h2");
             modalTitle.className = "modal-title";
             modalTitle.id = "exampleModalLabel";
-            modalTitle.textContent = "Fenetre Modal";
+            modalTitle.textContent = "INFORMATIONS";
         modalHeader.appendChild(modalTitle);
 
         let modalBtn = document.createElement("button");
@@ -756,12 +780,16 @@ function apiResultRelease(result, response) {
 
         // Vérifier qu'il y a un artiste
         if(result["artist-credit"]){
-            artiste =  " nom artiste : " + forArtistName() + " ";
+            artiste = forArtistName();
                 
             function forArtistName () {
                 let artisteName = '';
                 for (var i = 0; i < result["artist-credit"].length; i++) {
-                    artisteName += result["artist-credit"][i].name + " + ";
+                    artisteName += result["artist-credit"][i].name + " feat ";
+                }
+                let lastCharacter = artisteName.slice(-5, -1);
+                if(lastCharacter == "feat"){
+                    artisteName = artisteName.slice(0, -6);
                 }
                 return artisteName;
             }
@@ -769,20 +797,23 @@ function apiResultRelease(result, response) {
 
         // Vérifier qu'il y a des albums
         if(result){
-            album = " nom album : " + result.title + " ";
-            
+            album = result.title;
         }
 
         // Vérifier qu'il y a des genres
         if(result.tags){
-            tag = " genre : " + forTags() + " ";
+            tag = forTags();
                 
             function forTags () {
                 let tagsName = '';
-                for (var i = 0; i < result.tags.length; i++) {
-                    tagsName += result.tags[i].name + " + ";
-                }
-                return tagsName;
+                    for (var i = 0; i < result.tags.length; i++) {
+                        tagsName += result.tags[i].name + " -";
+                    }
+                    let lastCharacter = tagsName.slice(-1);
+                    if(lastCharacter == "-"){
+                        tagsName = tagsName.slice(0, -2);
+                    }
+                    return tagsName;
             }
         }
 
@@ -812,7 +843,7 @@ function apiResultRelease(result, response) {
         modalBtnClose.className = "btn btn-secondary";
         modalBtnClose.setAttribute('data-bs-dismiss', 'modal');
         modalBtnClose.setAttribute('type', 'button');
-        modalBtnClose.textContent = 'Close';
+        modalBtnClose.textContent = 'CLOSE';
     modalFooter.appendChild(modalBtnClose);
         
     
@@ -833,11 +864,42 @@ function apiResultRelease(result, response) {
 function modalResult(duree, titre, artiste, album, tag){
     const resultModal = document.querySelector("#resultModal");
 
-    let myModal = document.createElement("p");
-        myModal.textContent = duree + " + " + titre + " + " + artiste + " + " + album + " + " + tag;
-        myModal.className = "myModal";
+    let modalDuree = document.createElement("p");
+    let spanDuree = document.createElement("span");
+        spanDuree.textContent = "Durée : ";
+        modalDuree.textContent = duree;
+        modalDuree.className = "modal-duree";
+    modalDuree.prepend(spanDuree);
+    let modalTitre = document.createElement("p");
+    let spanTitre = document.createElement("span");
+        spanTitre.textContent = "Titre : ";
+        modalTitre.textContent = titre;
+        modalTitre.className = "modal-titre";
+    modalTitre.prepend(spanTitre);
+    let modalArtiste = document.createElement("p");
+    let spanArtiste = document.createElement("span");
+        spanArtiste.textContent = "Artiste : ";
+        modalArtiste.textContent = artiste;
+        modalArtiste.className = "modal-artiste";
+    modalArtiste.prepend(spanArtiste);
+    let modalAlbum = document.createElement("p");
+    let spanAlbum = document.createElement("span");
+        spanAlbum.textContent = "Album : ";
+        modalAlbum.textContent = album;
+        modalAlbum.className = "modal-album";
+    modalAlbum.prepend(spanAlbum);
+    let modalTag = document.createElement("p");
+    let spanTag = document.createElement("span");
+        spanTag.textContent = "Genre : ";
+        modalTag.textContent = tag;
+        modalTag.className = "modal-tag";
+    modalTag.prepend(spanTag);
 
-    resultModal.appendChild(myModal);
+    resultModal.appendChild(modalArtiste);
+    resultModal.appendChild(modalTitre);
+    resultModal.appendChild(modalAlbum);
+    resultModal.appendChild(modalDuree);
+    //resultModal.appendChild(modalTag);
 }
 
 
@@ -849,7 +911,7 @@ function coverResult(idRelease){
 
     let imgCover = document.createElement("img");
         imgCover.className = "imgCoverId";
-        imgCover.setAttribute('src', idRelease.thumbnails.small);
+        imgCover.setAttribute('src', idRelease.thumbnails.large);
 
     resultModal.appendChild(imgCover);
 }

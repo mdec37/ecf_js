@@ -31,38 +31,41 @@ SEARCH_FORM.addEventListener("submit", (ev) => {
     // APPELER DES FONCTIONS AVEC UN SETTIMEOUT POUR VOIR LE SPINNER
     setTimeout(function(){
         spinner.style.display = "none";
-        TABLE_HEADER.style.display = "block";
 
+        if (SELECT_FORM.value == "filtre") {
+            RESULT_SENTENCE.textContent = "Veuillez choisir un filtre pour faire votre recherche";
+        } else if (INPUT_VALUE.value != "") {
+            TABLE_HEADER.style.display = "block";
+        } else if (INPUT_VALUE.value == "") {
+            RESULT_SENTENCE.textContent = "Veuillez saisir quelque chose pour faire votre recherche";
+        };
+        
         // APPEL DES FONCTIONS
-        if (SELECT_FORM.value == "artiste") {
-            
+        if (SELECT_FORM.value == "artiste" & INPUT_VALUE.value != "") {
             apiGetArtist(INPUT_VALUE.value);
 
             setTimeout(function(){
                 FOOTER_BTN_ARTIST.style.display = "block";
             }, 500);
         } 
-        else if (SELECT_FORM.value == "titre") {
+        else if (SELECT_FORM.value == "titre" & INPUT_VALUE.value != "") {
             apiGetRecord(INPUT_VALUE.value);
 
             setTimeout(function(){
                 FOOTER_BTN_RECORD.style.display = "block";
             }, 500);
-            console.log("input sélectionné : titre");
         } 
-        else if (SELECT_FORM.value == "album") {
+        else if (SELECT_FORM.value == "album" & INPUT_VALUE.value != "") {
             apiGetRelease(INPUT_VALUE.value);
 
             setTimeout(function(){
                 FOOTER_BTN_RELEASE.style.display = "block";
             }, 500);
-            console.log("input sélectionné : album");
         } 
-        else if (SELECT_FORM.value == "all") {
+        else if (SELECT_FORM.value == "all" & INPUT_VALUE.value != "") {
             setTimeout(function(){
                 FOOTER_BTN_ALL.style.display = "block";
             }, 500);
-            console.log("input sélectionné : all");
         }
     },1200);
 });

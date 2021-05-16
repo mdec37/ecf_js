@@ -1,9 +1,12 @@
 /// TO DO 
 
 
----> 2 // Faire design pour modal
-
 
 6 // Recherche album : gérer les autres infos
 
 7 // Recherche ALL
+
+
+
+
+VOIR SI ON PEUT FACILEMENT FAIRE UN FICHIER FONCTION QUI APPARAISSENT IDENTIQUES A PLUSIEURS ENDROITS AU LIEU DE LES ECRIRE A CHAQUE FOIS

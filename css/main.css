@@ -279,7 +279,7 @@ tfoot, tfoot tr, tfoot th {
 tfoot th {
     text-align: center;
     padding: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 
     color: rgb(235, 235, 235);
     background-color: rgba(43, 43, 43, 0.76);
@@ -297,4 +297,27 @@ tfoot th:hover {
 /* loader */
 .spinner-border {
     width: 4rem; height: 4rem;
+}
+
+
+/* result modal - span */
+#resultModal {
+    margin-top: 1rem;
+}
+#resultModal span {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin: 0.5rem 1rem;
+    text-transform: uppercase;
+    display: inline-block;
+}
+#resultModal img {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5rem;
+}
+
+/* modal footer */
+.modal-footer button {
+    font-size: 1.4rem;
 }

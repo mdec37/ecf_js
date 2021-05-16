@@ -8,9 +8,12 @@ function apiGetArtist(artist) {
                 const response = JSON.parse(request.responseText);
                 response.artists.map(artist => artistResult(artist, response));
             } else {
-                console.log("error");
+                RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
             }
         }
+        //  else{
+        //     RESULT_SENTENCE.textContent = "Il n'y a pas de résultat pour cette recherche. Veuillez réessayer.";
+        // }
     });
     request.send();
 }
@@ -28,9 +31,12 @@ function apiGetTitle(idArtist) {
                 const response = JSON.parse(request.responseText);
                 response.recordings.map(idArtist => titleResult(idArtist, response));
             } else {
-                console.log("error");
+                RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
             }
-        }
+        } 
+        // else{
+        //     RESULT_SENTENCE.textContent = "Il n'y a pas de résultat pour cette recherche. Veuillez réessayer.";
+        // }
     });
     request.send();
 }
@@ -69,9 +75,12 @@ function apiGetRecord(result) {
                 const response = JSON.parse(request.responseText);
                 response.recordings.map(result => apiResultRecording(result, response));
             } else {
-                console.log("error");
+                RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
             }
-        }
+        } 
+        // else{
+        //     RESULT_SENTENCE.textContent = "Il n'y a pas de résultat pour cette recherche. Veuillez réessayer.";
+        // }
     });
     request.send();
 }
@@ -87,10 +96,14 @@ function apiGetRelease(result) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
                 response.releases.map(result => apiResultRelease(result, response));
+                console.log(response);
             } else {
-                console.log("error");
+                RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
             }
-        }
+        } 
+        // else{
+        //     RESULT_SENTENCE.textContent = "Il n'y a pas de résultat pour cette recherche. Veuillez réessayer.";
+        // }
     });
     request.send();
 }
