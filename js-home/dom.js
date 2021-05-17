@@ -577,7 +577,54 @@ function apiResultRelease(result, response) {
         resultsZone.textContent = "Il faut saisir quelque chose";
         console.log("Error : 1 ");
     }
+//
+//
+//
+//
+    releaseTitleResult(result.id);//
+//
+//
+//
+//
+
 }
+//
+//
+//
+//
+//
+// ICI//
+//
+
+// RESULTAT ALBUM 
+function resultAlbumTitle(idRelease, response){
+    console.log(idRelease, response);
+
+    let resultAlbum = document.createElement("p");
+        resultAlbum.textContent = "artiste : " + idRelease["artist-credit"][0].name + "titre : " + idRelease.title + "album : " + idRelease.releases[0].title;
+        resultsZone.appendChild(resultAlbum);
+
+}
+//
+//
+//
+//
+//
+//
+//
+// fonction affichage pour tous les resultats
+function apiResultAll(result, response){
+    console.log(result, response);
+
+    let resultAll = document.createElement("p");
+        resultAll.textContent = "artiste : " + result["artist-credit"][0].name + " titre : " + result.title + " album : " + result.releases[0].title;
+        resultsZone.appendChild(resultAll);
+}
+//
+//
+//
+//
+//
 
 
 
@@ -853,6 +900,7 @@ function apiResultRecords(idArtist, response) {
     myRecording.appendChild(btnInfo);
 
     resultsZone.appendChild(myRecording);
+
 }
 
 

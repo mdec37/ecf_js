@@ -29,7 +29,7 @@ function apiGetTitle(idArtist) {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
-                response.recordings.map(idArtist => titleResult(idArtist, response));
+                response.recordings.map(idArtist => artistTitleResult(idArtist, response));
             } else {
                 RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
             }
@@ -73,7 +73,7 @@ function apiGetRecord(result) {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
-                response.recordings.map(result => apiResultRecording(result, response));
+                response.recordings.map(result => recordingResult(result, response));
             } else {
                 RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
             }
@@ -95,7 +95,7 @@ function apiGetRelease(result) {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
-                response.releases.map(result => apiResultRelease(result, response));
+                response.releases.map(result => releaseResult(result, response));
                 console.log(response);
             } else {
                 RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
@@ -107,3 +107,24 @@ function apiGetRelease(result) {
     });
     request.send();
 }
+
+// // RECUPERER LES TITRES ASSOCIES AUX RELEASES 
+// function apiGetRelease(result) {
+//     const request = new XMLHttpRequest();
+//     request.open("GET", MUSICBRAINZ_API_URL + "release/?query=" + encodeURIComponent(result) + "&limit=25&offset="+ countOffset + "&fmt=json", true);
+//     request.addEventListener("readystatechange", () => {
+//         if (request.readyState === XMLHttpRequest.DONE) {
+//             if (request.status === 200) {
+//                 const response = JSON.parse(request.responseText);
+//                 response.releases.map(result => releaseResult(result, response));
+//                 console.log(response);
+//             } else {
+//                 RESULT_SENTENCE.textContent = "Une erreur est survenue. Merci de réessayer";
+//             }
+//         } 
+//         // else{
+//         //     RESULT_SENTENCE.textContent = "Il n'y a pas de résultat pour cette recherche. Veuillez réessayer.";
+//         // }
+//     });
+//     request.send();
+// }

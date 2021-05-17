@@ -116,19 +116,65 @@ function apiGetRelease(result) {
 
 
 
-// ALL
-// function apiGetAll(result) {
-//     const request = new XMLHttpRequest();
-//     request.open("GET", MUSICBRAINZ_API_URL + "?query=recording:"+ encodeURIComponent(result) OR + "artistname:" + encodeURIComponent(result) OR "release:" +  + "&limit=25&offset=${offset}&fmt=json", true);
-//     request.addEventListener("readystatechange", () => {
-//         if (request.readyState === XMLHttpRequest.DONE) {
-//             if (request.status === 200) {
-//                 const response = JSON.parse(request.responseText);
-//                 response.releases.map(result => apiResultAll(result, response));
-//             } else {
-//                 console.log("error");
-//             }
-//         }
-//     });
-//     request.send();
-// }
+//
+//
+//
+//
+// ICI
+// RECUPERER LES TITRES ASSOCIES AUX RELEASES 
+function releaseTitleResult(idRelease) {
+    const request = new XMLHttpRequest();
+    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=reid:" + encodeURIComponent(idRelease) + "&limit=25&offset="+ countOffset + "&fmt=json", true);
+    request.addEventListener("readystatechange", () => {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                const response = JSON.parse(request.responseText);
+                console.log(response);
+                response.recordings.map(idRelease => resultAlbumTitle(idRelease, response));
+            } else {
+                console.log("error");
+            }
+        }
+    });
+    request.send();
+}
+//
+//
+//
+//
+//
+
+
+
+
+
+//
+//
+//
+//
+// ICI
+//
+//
+
+// RECHERCHE POUR TOUT
+function apiGetAll(result) {
+    const request = new XMLHttpRequest();
+    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=recording:"+ encodeURIComponent(result) + " OR artistname:" + encodeURIComponent(result) + " OR release:" + encodeURIComponent(result) + "&limit=25&offset=0&fmt=json", true);
+    request.addEventListener("readystatechange", () => {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                const response = JSON.parse(request.responseText);
+                console.log(result, response);
+                response.recordings.map(result => apiResultAll(result, response));
+            } else {
+                console.log("error");
+            }
+        }
+    });
+    request.send();
+}
+
+
+//
+//
+//

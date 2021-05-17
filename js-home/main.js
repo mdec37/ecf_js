@@ -38,7 +38,7 @@ searchForm.addEventListener("submit", (ev) => {
     } 
     else if (selectForm.value == "all") {
 
-        
+        apiGetAll(artistName.value);
         console.log("input sélectionné : all");
     }
     

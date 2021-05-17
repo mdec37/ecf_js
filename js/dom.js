@@ -21,7 +21,7 @@ let FIRST_TIME = false;
 
 
 /// AFFICHAGE DES RESULTATS / LISTE DES RESULTATS / MODALE
-function titleResult(idArtist, response) {
+function artistTitleResult(idArtist, response) {
     NB_RESULT_LINE += 1;
 
     console.log(idArtist, response);
@@ -314,7 +314,7 @@ function titleResult(idArtist, response) {
 
 
 
-function apiResultRecording(result, response) {
+function recordingResult(result, response) {
     if (result) {
         NB_RESULT_LINE += 1;
         
@@ -606,7 +606,7 @@ function apiResultRecording(result, response) {
 
 
 
-function apiResultRelease(result, response) {
+function releaseResult(result, response) {
     if (result) {
         NB_RESULT_LINE += 1;
         
