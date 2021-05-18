@@ -4,6 +4,7 @@ function artistResult(artist, response) {
         if (artist.score === 100 ) {
             apiGetArtistRecord(artist.id);
         }
+    }
 }
 
 
