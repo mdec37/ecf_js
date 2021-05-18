@@ -63,6 +63,8 @@ SEARCH_FORM.addEventListener("submit", (ev) => {
             }, 500);
         } 
         else if (SELECT_FORM.value == "all" & INPUT_VALUE.value != "") {
+            apiGetAll(INPUT_VALUE.value);
+            
             setTimeout(function(){
                 FOOTER_BTN_ALL.style.display = "block";
             }, 500);
