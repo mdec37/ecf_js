@@ -1,3 +1,4 @@
+// ACTIONS LORS DU SUBMIT DU FORMULAIRE
 SEARCH_FORM.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
@@ -32,6 +33,7 @@ SEARCH_FORM.addEventListener("submit", (ev) => {
     setTimeout(function(){
         spinner.style.display = "none";
 
+        // GERER LES ERREURS UTILISATEURS
         if (SELECT_FORM.value == "filtre") {
             RESULT_SENTENCE.textContent = "Veuillez choisir un filtre pour faire votre recherche";
         } else if (INPUT_VALUE.value != "") {

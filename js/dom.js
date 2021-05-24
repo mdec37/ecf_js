@@ -1,5 +1,5 @@
 /// APPEL DE LA FUNCTION apiGetArtistRecord A L'AIDE DE L'ID DE L'ARTITSTE QU'ON VIENT DE RECUPERER DANS L'INPUT
-function artistResult(artist, response) {
+function artistResult(artist) {
     if (artist) {
         if (artist.score === 100 ) {
             apiGetArtistRecord(artist.id);
@@ -19,15 +19,7 @@ function artistTitleResult(idArtist, response) {
     NB_RESULT_LINE += 1;
 
     // RESULTAT DE LA RECHERCHE A AFFICHER QU'UNE SEULE FOIS
-    if (!FIRST_TIME){
-        let resultSentence = document.createElement("p");
-            resultSentence.className = "result-sentence";
-            resultSentence.textContent = response.count + " résultat(s) pour la recherche : " + INPUT_VALUE.value;
-        
-        RESULT_SENTENCE.appendChild(resultSentence);
-
-        FIRST_TIME = true;
-    }
+    FCT_First_Time (response.count);
 
 
     /// Création du tr du tableau pour chaque résultat
@@ -38,7 +30,6 @@ function artistTitleResult(idArtist, response) {
     let nbLine = document.createElement("td");
         nbLine.textContent = NB_RESULT_LINE;
     trBody.appendChild(nbLine);
-
 
 
     /// 1 - AFFICHER LES ARTISTES
@@ -72,7 +63,6 @@ function artistTitleResult(idArtist, response) {
     }
 
 
-
     /// 2 - AFFICHER LE TITRE 
     // Vérifier qu'il y a un titre
     if(idArtist.title){
@@ -84,7 +74,6 @@ function artistTitleResult(idArtist, response) {
             recordTitle.textContent = " - ";
         trBody.appendChild(recordTitle);
     }
-
 
 
     /// 3- AFFICHER LES ALBUMS
@@ -148,9 +137,8 @@ function artistTitleResult(idArtist, response) {
     tdButton.appendChild(btnInfo);
 
 
-
     /// 4A - FENETRE MODAL
-    // MODAL HEADER
+    // // MODAL HEADER
     let modalFade = document.createElement("div");
         modalFade.className = "modal fade";
         modalFade.id = "exampleModal";
@@ -203,6 +191,8 @@ function artistTitleResult(idArtist, response) {
                 let seconds = ((millis % 60000) / 1000).toFixed(0);
                 return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
             }
+        } else {
+            duree = "Pas de durée pour ce titre";
         }
 
         // Vérifier qu'il y a un titre
@@ -259,11 +249,13 @@ function artistTitleResult(idArtist, response) {
                 }
                 return tagsName;
             }
+        } else {
+            tag = "Pas de genre pour ce titre";
         }
 
 
         // APPEL DE LA FONCTION MODALRESULT AVEC COMME PARAMETRES, CHAQUE ELEMENTS CREES
-        modalResult(duree, titre, artiste, album, tag = "");
+        modalResult(duree, titre, artiste, album, tag);
 
 
         // RECUPERER TOUS LES ID DES ALBUMS QU'ON PASSE EN PARAMETRE DE APIGETCOVER QUI APPELLE LES COVERS
@@ -278,14 +270,12 @@ function artistTitleResult(idArtist, response) {
     });
 
 
-
     /// EVENEMENTS A LA FERMTURE DE LA MODALE : SUPPRESSION
     modalFade.addEventListener('hidden.bs.modal', function () {
         modalBody.textContent = null;
     });
 
 
-    
     // MODAL FOOTER
     let modalFooter = document.createElement("div");
         modalFooter.className = "modal-footer";
@@ -306,20 +296,14 @@ function artistTitleResult(idArtist, response) {
 
 
 
+// RESULTAT POUR LA RECHERCHE DES TITRES
 function recordingResult(result, response) {
     if (result) {
         NB_RESULT_LINE += 1;
         
         // RESULTAT DE LA RECHERCHE A AFFICHER QU'UNE SEULE FOIS
-        if (!FIRST_TIME){
-            let resultSentence = document.createElement("p");
-                resultSentence.className = "result-sentence";
-                resultSentence.textContent = response.count + " résultat(s) pour la recherche : " + INPUT_VALUE.value;
-            
-            RESULT_SENTENCE.appendChild(resultSentence);
+        FCT_First_Time(response.count);
 
-            FIRST_TIME = true;
-        }
 
         /// Création du tr du tableau pour chaque résultat
         let trBody = document.createElement("tr");
@@ -329,7 +313,6 @@ function recordingResult(result, response) {
         let nbLine = document.createElement("td");
             nbLine.textContent = NB_RESULT_LINE;
         trBody.appendChild(nbLine);
-
 
 
         /// 1 - AFFICHER LES ARTISTES
@@ -488,6 +471,8 @@ function recordingResult(result, response) {
                     let seconds = ((millis % 60000) / 1000).toFixed(0);
                     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
                 }
+            } else {
+                duree = "Pas de durée pour ce titre.";
             }
 
             // Vérifier qu'il y a un titre
@@ -544,11 +529,13 @@ function recordingResult(result, response) {
                     }
                     return tagsName;
                 }
+            } else {
+                tag = "Pas de genre pour ce titre.";
             }
 
 
             // APPEL DE LA FONCTION MODALRESULT AVEC COMME PARAMETRES, CHAQUE ELEMENTS CREES
-            modalResult(duree, titre, artiste, album, tag = "");
+            modalResult(duree, titre, artiste, album, tag);
 
 
             // RECUPERER TOUS LES ID DES ALBUMS QU'ON PASSE EN PARAMETRE DE APIGETCOVER QUI APPELLE LES COVERS
@@ -563,14 +550,12 @@ function recordingResult(result, response) {
         });
 
 
-
         /// EVENEMENTS A LA FERMTURE DE LA MODALE : SUPPRESSION
         modalFade.addEventListener('hidden.bs.modal', function () {
             modalBody.textContent = null;
         });
 
 
-        
         // MODAL FOOTER
         let modalFooter = document.createElement("div");
             modalFooter.className = "modal-footer";
@@ -595,6 +580,7 @@ function recordingResult(result, response) {
 
 
 
+// APPEL DE LA REQUETE POUR LE RESULTAT DES ALBUMS 
 function releaseResult(result, response) {
     let countResponse = response.count;
     apiGetReleaseRecord(result.id, countResponse);
@@ -602,22 +588,14 @@ function releaseResult(result, response) {
 
 
 
-// RESULTAT ALBUM 
-function resultAlbumTitle(idRelease, response, countResponse){
-
+// RESULTAT POUR LA RECHERCHE DES ALBUMS
+function resultAlbumTitle(idRelease, countResponse){
     if (idRelease) {
         NB_RESULT_LINE += 1;
 
         // RESULTAT DE LA RECHERCHE A AFFICHER QU'UNE SEULE FOIS
-        if (!FIRST_TIME){
-            let resultSentence = document.createElement("p");
-                resultSentence.className = "result-sentence";
-                resultSentence.textContent = countResponse + " résultat(s) pour la recherche : " + INPUT_VALUE.value;
-            
-            RESULT_SENTENCE.appendChild(resultSentence);
+        FCT_First_Time(countResponse);
 
-            FIRST_TIME = true;
-        }
 
         /// Création du tr du tableau pour chaque résultat
         let trBody = document.createElement("tr");
@@ -627,7 +605,6 @@ function resultAlbumTitle(idRelease, response, countResponse){
         let nbLine = document.createElement("td");
             nbLine.textContent = NB_RESULT_LINE;
         trBody.appendChild(nbLine);
-
 
 
         /// 1 - AFFICHER LES ARTISTES
@@ -663,7 +640,6 @@ function resultAlbumTitle(idRelease, response, countResponse){
 
         /// 2 - AFFICHER LE TITRE 
         // Vérifier qu'il y a un titre
-        // if(idRelease.title){
         if(idRelease){
             let recordTitle = document.createElement("td");
                 recordTitle.textContent = idRelease.title;
@@ -729,7 +705,6 @@ function resultAlbumTitle(idRelease, response, countResponse){
         tdButton.appendChild(btnInfo);
                 
         
-        
         /// 4A - FENETRE MODAL
         // MODAL HEADER
         let modalFade = document.createElement("div");
@@ -784,6 +759,8 @@ function resultAlbumTitle(idRelease, response, countResponse){
                 let seconds = ((millis % 60000) / 1000).toFixed(0);
                 return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
             }
+        } else {
+            duree = "Pas de durée pour ce titre."
         }
 
         // Vérifier qu'il y a un titre
@@ -810,9 +787,7 @@ function resultAlbumTitle(idRelease, response, countResponse){
 
         // Vérifier qu'il y a des albums
         if(idRelease){
-                    // GERER QUAND IL Y A QU'UN SEUL ALBUM
-            //album = forReleaseName();
-            album = idRelease.releases[0].title;
+            album = forReleaseName();
                 
             function forReleaseName () {
                 let releaseName = '';
@@ -842,10 +817,12 @@ function resultAlbumTitle(idRelease, response, countResponse){
                     }
                     return tagsName;
             }
+        } else {
+            tag = "Pas de genre pour ce titre."
         }
 
         // APPEL DE LA FONCTION MODALRESULT AVEC COMME PARAMETRES, CHAQUE ELEMENTS CREES
-        modalResult(duree, titre, artiste, album, tag = "");
+        modalResult(duree, titre, artiste, album, tag);
 
 
         // RECUPERER TOUS LES ID DES ALBUMS QU'ON PASSE EN PARAMETRE DE APIGETCOVER QUI APPELLE LES COVERS
@@ -860,14 +837,12 @@ function resultAlbumTitle(idRelease, response, countResponse){
     });
 
 
-
     /// EVENEMENTS A LA FERMTURE DE LA MODALE : SUPPRESSION
     modalFade.addEventListener('hidden.bs.modal', function () {
         modalBody.textContent = null;
     });
 
 
-    
     // MODAL FOOTER
     let modalFooter = document.createElement("div");
         modalFooter.className = "modal-footer";
@@ -892,25 +867,14 @@ function resultAlbumTitle(idRelease, response, countResponse){
 
 
 
-
-
-
-
-// fonction affichage pour tous les resultats
+// RESULTAT POUR LA RECHERCHE POUR ALL
 function apiResultAll(result, response){
     if (result) {
         NB_RESULT_LINE += 1;
         
         // RESULTAT DE LA RECHERCHE A AFFICHER QU'UNE SEULE FOIS
-        if (!FIRST_TIME){
-            let resultSentence = document.createElement("p");
-                resultSentence.className = "result-sentence";
-                resultSentence.textContent = response.count + " résultat(s) pour la recherche : " + INPUT_VALUE.value;
-            
-            RESULT_SENTENCE.appendChild(resultSentence);
+        FCT_First_Time(response.count);
 
-            FIRST_TIME = true;
-        }
 
         /// Création du tr du tableau pour chaque résultat
         let trBody = document.createElement("tr");
@@ -920,7 +884,6 @@ function apiResultAll(result, response){
         let nbLine = document.createElement("td");
             nbLine.textContent = NB_RESULT_LINE;
         trBody.appendChild(nbLine);
-
 
 
         /// 1 - AFFICHER LES ARTISTES
@@ -1079,6 +1042,8 @@ function apiResultAll(result, response){
                     let seconds = ((millis % 60000) / 1000).toFixed(0);
                     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
                 }
+            } else {
+                duree = "Pas de durée pour ce titre."
             }
 
             // Vérifier qu'il y a un titre
@@ -1088,7 +1053,7 @@ function apiResultAll(result, response){
 
             // Vérifier qu'il y a un artiste
             if(result["artist-credit"]){
-                    artiste = forArtistName();
+                artiste = forArtistName();
                     
                 function forArtistName () {
                     let artisteName = '';
@@ -1135,11 +1100,13 @@ function apiResultAll(result, response){
                     }
                     return tagsName;
                 }
+            } else {
+                tag = "Pas de genre pour ce titre."
             }
 
 
             // APPEL DE LA FONCTION MODALRESULT AVEC COMME PARAMETRES, CHAQUE ELEMENTS CREES
-            modalResult(duree, titre, artiste, album, tag = "");
+            modalResult(duree, titre, artiste, album, tag);
 
 
             // RECUPERER TOUS LES ID DES ALBUMS QU'ON PASSE EN PARAMETRE DE APIGETCOVER QUI APPELLE LES COVERS
@@ -1154,12 +1121,10 @@ function apiResultAll(result, response){
         });
 
 
-
         /// EVENEMENTS A LA FERMTURE DE LA MODALE : SUPPRESSION
         modalFade.addEventListener('hidden.bs.modal', function () {
             modalBody.textContent = null;
         });
-
 
         
         // MODAL FOOTER
@@ -1183,8 +1148,6 @@ function apiResultAll(result, response){
         resultsZone.textContent = "Il faut saisir quelque chose";
     }
 }
-
-
 
 
 
@@ -1227,9 +1190,8 @@ function modalResult(duree, titre, artiste, album, tag){
     resultModal.appendChild(modalTitre);
     resultModal.appendChild(modalAlbum);
     resultModal.appendChild(modalDuree);
-    //resultModal.appendChild(modalTag);
+    resultModal.appendChild(modalTag);
 }
-
 
 
 
@@ -1243,7 +1205,6 @@ function coverResult(idRelease){
 
     resultModal.appendChild(imgCover);
 }
-
 
 
 
@@ -1262,7 +1223,7 @@ BTN_RELEASE.addEventListener("click", () => {
     countOffset++;
     apiGetRelease(INPUT_VALUE.value);
 });
-// BTN_ALL.addEventListener("click", () => {
-//     (INPUT_VALUE.value);
-//     countOffset++;
-// });
+BTN_ALL.addEventListener("click", () => {
+    countOffset++;
+    apiGetAll(INPUT_VALUE.value);
+});

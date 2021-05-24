@@ -1,12 +1,12 @@
 // RECUPERER LES INFOS DE L'ARTISTE EN FONCTION DE L'INPUT VALUE
 function apiGetArtist(artist) {
     const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "artist/?query=" + encodeURIComponent(artist) + "&limit=25&offset=0&fmt=json", true);
+    request.open("GET", MUSICBRAINZ_API_URL + "artist/?query=" + encodeURIComponent(artist) + "&limit=45&offset=0&fmt=json", true);
     request.addEventListener("readystatechange", () => {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
-                response.artists.map(artist => artistResult(artist, response));
+                response.artists.map(artist => artistResult(artist));
                 if(response.count == 0 ){
                     RESULT_SENTENCE.textContent = "Il n'y a pas de résultat pour cette recherche. Veuillez réessayer.";
                 }
@@ -23,7 +23,7 @@ function apiGetArtist(artist) {
 // RECUPERER LES TITRES DE L'ARTISTE EN FONCTION DE SON ID
 function apiGetArtistRecord(idArtist) {          
     const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=arid:" + encodeURIComponent(idArtist) + "&limit=25&offset="+ countOffset + "&fmt=json", true);
+    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=arid:" + encodeURIComponent(idArtist) + "&limit=45&offset="+ countOffset + "&fmt=json", true);
     request.addEventListener("readystatechange", () => {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
@@ -50,8 +50,6 @@ function apiGetCover(idRelease) {
                 response.images.map(idRelease => coverResult(idRelease));
             } if (request.status === 404) {
                 console.log("Pas d'image pour cette release");
-            } else {
-                console.log("error");
             }
         }
     });
@@ -63,7 +61,7 @@ function apiGetCover(idRelease) {
 // RECUPERER LES INFOS DES RECORDS EN FONCTION DE L'INPUT VALUE
 function apiGetRecord(result) {
     const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=" + encodeURIComponent(result) + "&limit=25&offset="+ countOffset + "&fmt=json", true);
+    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=" + encodeURIComponent(result) + "&limit=45&offset="+ countOffset + "&fmt=json", true);
     request.addEventListener("readystatechange", () => {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
@@ -85,7 +83,7 @@ function apiGetRecord(result) {
 // RECUPERER LES INFOS DES RELEASES EN FONCTION DE L'INPUT VALUE
 function apiGetRelease(result) {
     const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "release/?query=" + encodeURIComponent(result) + "&limit=25&offset="+ countOffset + "&fmt=json", true);
+    request.open("GET", MUSICBRAINZ_API_URL + "release/?query=" + encodeURIComponent(result) + "&limit=45&offset="+ countOffset + "&fmt=json", true);
     request.addEventListener("readystatechange", () => {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
@@ -106,12 +104,12 @@ function apiGetRelease(result) {
 // RECUPERER LES RECORDS EN FONCTION DE L'ID DES RELEASES
 function apiGetReleaseRecord(idRelease, countResponse) {           
     const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=reid:" + encodeURIComponent(idRelease) + "&limit=25&offset="+ countOffset + "&fmt=json", true);
+    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=reid:" + encodeURIComponent(idRelease) + "&limit=45&offset="+ countOffset + "&fmt=json", true);
     request.addEventListener("readystatechange", () => {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 const response = JSON.parse(request.responseText);
-                response.recordings.map(idRelease => resultAlbumTitle(idRelease, response, countResponse));
+                response.recordings.map(idRelease => resultAlbumTitle(idRelease, countResponse));
             } else {
                 RESULT_SENTENCE.textContent = "Un problème est survenu. Veuillez réessayer plus tard.";
             }
@@ -122,10 +120,10 @@ function apiGetReleaseRecord(idRelease, countResponse) {
 
 
 
-// RECHERCHE DE TITRES SI LE RESULTAT EST SOIT UN RECORD, SOIT UN ARTIST, SOIT UNE RELEASE
+// RECHERCHE DE TITRES OU LE RESULTAT EST SOIT UN RECORD, SOIT UN ARTIST, SOIT UNE RELEASE
 function apiGetAll(result) {
     const request = new XMLHttpRequest();
-    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=recording:"+ encodeURIComponent(result) + " OR artistname:" + encodeURIComponent(result) + " OR release:" + encodeURIComponent(result) + "&limit=25&offset=0&fmt=json", true);
+    request.open("GET", MUSICBRAINZ_API_URL + "recording/?query=recording:"+ encodeURIComponent(result) + " OR artistname:" + encodeURIComponent(result) + " OR release:" + encodeURIComponent(result) + "&limit=45&offset=0&fmt=json", true);
     request.addEventListener("readystatechange", () => {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
